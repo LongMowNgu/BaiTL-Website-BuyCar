@@ -1,28 +1,31 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Quên mật khẩu - Trang Bán Xe</title>
+  <title>Forgot Password - AutoTrade</title>
+  <!-- Bootstrap (match index theme) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Abel&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <!-- Shared site styles to match index theme -->
+  <link rel="stylesheet" href="../index/styles.css" />
   <link rel="stylesheet" href="login.css" />
   <meta name="theme-color" content="#0a0d14" />
 </head>
 <body>
   <div class="page-bg"></div>
   <header class="site-header">
-    <a class="brand" href="../index/index.html">
+    <a class="brand" href="../index/index.html" aria-label="LuxAuto home">
       <div class="logo-container">
-        <i class="fa-solid fa-car logo-icon"></i>
-        <span class="logo-text">AutoTrade</span>
+        <img src="../logo/logo9.png" alt="LuxAuto" class="brand-logo" />
       </div>
     </a>
   </header>
   <main class="center-area">
     <div class="card">
-      <h1 class="title">Quên mật khẩu</h1>
-      <p class="subtitle">Nhập email để nhận hướng dẫn đặt lại mật khẩu</p>
+      <h1 class="title">Forgot Password</h1>
+      <p class="subtitle">Enter your email to receive reset instructions</p>
 
       <div id="alert" class="alert hidden" role="status"></div>
 
@@ -30,21 +33,21 @@
         <label class="field">
           <span class="label-text"><i class="fa-solid fa-envelope"></i> Email</span>
           <div class="input-with-icon">
-            <input id="email" type="email" placeholder="vd: long@gmail.com" required autocomplete="email" />
+            <input id="email" type="email" placeholder="e.g. long@gmail.com" required autocomplete="email" />
             <span class="validation-icon" id="emailValidation"></span>
           </div>
         </label>
 
         <div class="actions-row">
           <button type="submit" class="btn btn-primary btn-login" id="sendBtn" disabled>
-            <i class="fa-solid fa-paper-plane"></i> Gửi hướng dẫn
+            <i class="fa-solid fa-paper-plane"></i> Send instructions
           </button>
         </div>
 
         <div class="register-section">
-          <p class="register-text">Đã nhớ mật khẩu?</p>
+          <p class="register-text">Remembered your password?</p>
           <a href="login.html" class="btn btn-register">
-            <i class="fa-solid fa-right-to-bracket"></i> Quay lại đăng nhập
+            <i class="fa-solid fa-right-to-bracket"></i> Back to login
           </a>
         </div>
       </form>
@@ -55,7 +58,7 @@
   <div id="loadingOverlay" class="loading-overlay hidden">
     <div class="loading-content">
       <div class="spinner-border text-light" role="status"></div>
-      <p class="loading-text">Đang xử lý...</p>
+      <p class="loading-text">Processing...</p>
     </div>
   </div>
 
@@ -65,12 +68,14 @@
       <div class="success-checkmark">
         <i class="fa-solid fa-circle-check"></i>
       </div>
-      <p class="success-text">Email đã được gửi!</p>
+      <p class="success-text">Email sent!</p>
     </div>
   </div>
 
   <footer class="site-footer"><p>© 2025 • AutoTrade • All rights reserved</p></footer>
 
+  <script src="auth.js"></script>
   <script src="forgot.js"></script>
+  <script src="auth-effects.js"></script>
 </body>
 </html>
