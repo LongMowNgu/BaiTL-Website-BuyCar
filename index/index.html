@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Buy and sell cars online - Your trusted vehicle trading platform">
+    <title>LuxAuto - Buy & Sell Cars Online</title>
+    
+    <!-- Bootstrap 5 CSS (local) -->
+    <link href="../bootstrap-5.3.8-dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-fade-in">
+    <!-- Full-page Landing Animation -->
+    <div id="landingAnimation" class="landing-animation">
+            <video id="landingVideo" autoplay muted loop playsinline>
+            <source src="../img/main_landing_page_animation.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        
+        <!-- Transparent Menu Button (top-left corner) -->
+        <button class="landing-menu-btn overlay-trigger nav-menu-trigger" type="button">
+            <i class="bi bi-list"></i> MENU
+        </button>
+        
+        <!-- Centered Logo Overlay -->
+        <div class="logo-overlay">
+            <img src="../logo/logo9.png" alt="LuxAuto Logo" class="landing-logo">
+            
+            <!-- Search Bar and Filters Below Logo -->
+            <div class="landing-search-container">
+                <div class="search-bar-wrapper">
+                    <button class="landing-filter-toggle" id="filterToggle">
+                        <i class="bi bi-funnel"></i>
+                    </button>
+                    <input type="text" class="landing-search-input" placeholder="Search car">
+                    <button class="landing-search-btn">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+                
+                <!-- Collapsible Filter Group -->
+                <div class="filter-group" id="filterGroup">
+                    <select class="landing-filter">
+                        <option value="" disabled selected hidden>Car branch</option>
+                        <option value="ferrari">Ferrari</option>
+                        <option value="bugatti">Bugatti</option>
+                        <option value="lamborghini">Lamborghini</option>
+                        <option value="porsche">Porsche</option>
+                        <option value="mclaren">McLaren</option>
+                        <option value="aston-martin">Aston Martin</option>
+                        <option value="bentley">Bentley</option>
+                        <option value="rolls-royce">Rolls-Royce</option>
+                    </select>
+                    
+                    <select class="landing-filter">
+                        <option value="" disabled selected hidden>Region</option>
+                        <option value="usa">USA</option>
+                        <option value="england">England</option>
+                        <option value="france">France</option>
+                        <option value="germany">Germany</option>
+                        <option value="japan">Japan</option>
+                        <option value="china">China</option>
+                        <option value="south-korea">South Korea</option>
+                        <option value="italy">Italy</option>
+                        <option value="spain">Spain</option>
+                        <option value="viet-nam">Viet Nam</option>
+                    </select>
+                    
+                    <select class="landing-filter">
+                        <option value="" disabled selected hidden>Price range</option>
+                        <option value="0-50k">Under $50,000</option>
+                        <option value="50k-100k">$50,000 - $100,000</option>
+                        <option value="100k-200k">$100,000 - $200,000</option>
+                        <option value="200k-500k">$200,000 - $500,000</option>
+                        <option value="500k-1m">$500,000 - $1,000,000</option>
+                        <option value="1m+">$1,000,000+</option>
+                    </select>
+                    
+                    <!-- Advanced Filter Button -->
+                    <a href="../pages/browse.html" class="landing-advanced-filter-btn">
+                        <i class="bi bi-sliders"></i> Advanced Filter
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Down Indicator at Bottom -->
+        <a href="#featured" class="scroll-down">
+            <i class="bi bi-chevron-down"></i>
+        </a>
+    </div>
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-hidden" id="mainNav" style="background-color: rgb(18, 18, 18); backdrop-filter: blur(10px);">
+        <div class="container d-flex align-items-center">
+            <div class="navbar-left-group d-flex align-items-center me-auto">
+                <!-- Navigation Menu Button replaces logo -->
+                <button id="landingMenuBtn" class="landing-menu-btn nav-menu-trigger" type="button" aria-expanded="false" aria-controls="sectionMenuPanel">
+                    <i class="bi bi-list"></i> MENU
+                </button>
+            </div>
+
+            <!-- Mobile Toggle Button -->
+            <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <!-- Navigation Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#landingAnimation" data-page="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#buy-cars">Buy Cars</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#sell-cars">Sell Cars</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#featured">Featured Cars</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <!-- Authentication buttons use monochrome styling -->
+                        <div class="btn-group ms-lg-2" role="group">
+                            <a href="../login/login.html" class="btn btn-auth-outline pill-btn-left">
+                                Login
+                            </a>
+                            <a href="../register/register.html" class="btn btn-auth-solid pill-btn-right">
+                                Register
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section Navigation Panel -->
+        <div id="sectionMenuPanel" class="section-menu-panel" aria-hidden="true">
+            <div class="section-menu-card">
+                <div class="section-menu-header">
+                    <span class="section-menu-title">Browse Sections</span>
+                    <button id="sectionMenuClose" class="section-menu-close" type="button" aria-label="Close menu">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+                <ul id="sectionMenuList" class="section-menu-list"></ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Featured Cars Section -->
+    <section id="featured" class="featured-section section-transition py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold text-white">Featured Vehicles</h2>
+                <p class="lead text-light">Explore our handpicked selection of premium cars</p>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Car Card 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card car-card h-100 shadow-sm">
+                        <div class="card-img-top-wrapper">
+                            <img src="../img/image1.jpg" class="card-img-top" alt="Luxury Sedan">
+                            <span class="badge bg-primary position-absolute top-0 start-0 m-3">Featured</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Mercedes-Benz E-Class</h5>
+                            <p class="text-muted mb-2">
+                                <i class="bi bi-calendar3"></i> 2023 | 
+                                <i class="bi bi-speedometer2"></i> 15,000 km | 
+                                <i class="bi bi-fuel-pump"></i> Petrol
+                            </p>
+                            <p class="card-text">Luxury sedan with premium features and exceptional performance.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h4 class="text-primary mb-0">$75,000</h4>
+                                <a href="../pages/car-details.html" class="btn btn-outline-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Car Card 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card car-card h-100 shadow-sm">
+                        <div class="card-img-top-wrapper">
+                            <img src="../img/image2.jpg" class="card-img-top" alt="SUV">
+                            <span class="badge bg-success position-absolute top-0 start-0 m-3">New</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Toyota RAV4 Hybrid</h5>
+                            <p class="text-muted mb-2">
+                                <i class="bi bi-calendar3"></i> 2024 | 
+                                <i class="bi bi-speedometer2"></i> 5,000 km | 
+                                <i class="bi bi-fuel-pump"></i> Hybrid
+                            </p>
+                            <p class="card-text">Eco-friendly SUV with cutting-edge hybrid technology.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h4 class="text-primary mb-0">$42,500</h4>
+                                <a href="../pages/car-details.html" class="btn btn-outline-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Car Card 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card car-card h-100 shadow-sm">
+                        <div class="card-img-top-wrapper">
+                            <img src="../img/image3.jpg" class="card-img-top" alt="Sports Car">
+                            <span class="badge bg-danger position-absolute top-0 start-0 m-3">Hot Deal</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">BMW M3 Competition</h5>
+                            <p class="text-muted mb-2">
+                                <i class="bi bi-calendar3"></i> 2023 | 
+                                <i class="bi bi-speedometer2"></i> 8,000 km | 
+                                <i class="bi bi-fuel-pump"></i> Petrol
+                            </p>
+                            <p class="card-text">High-performance sports sedan for enthusiasts.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h4 class="text-primary mb-0">$89,900</h4>
+                                <a href="../pages/car-details.html" class="btn btn-outline-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- View All Button -->
+            <div class="text-center mt-5">
+                <a href="../pages/browse.html" class="btn btn-primary btn-lg">
+                    View All Vehicles <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="why-choose-us" class="hero-section section-transition d-flex align-items-center">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="display-4 fw-bold text-white mb-4">Why Choose LuxAuto</h2>
+                    <p class="lead text-white mb-4">
+                        We combine verified listings, transparent pricing, and concierge-level support to make buying or selling a vehicle effortless.
+                    </p>
+                    <ul class="list-unstyled text-light mb-4">
+                        <li class="d-flex align-items-start mb-3">
+                            <i class="bi bi-patch-check-fill text-primary me-3 fs-4"></i>
+                            <span>Every vehicle is inspected and certified by trusted experts before it goes live.</span>
+                        </li>
+                        <li class="d-flex align-items-start mb-3">
+                            <i class="bi bi-graph-up-arrow text-primary me-3 fs-4"></i>
+                            <span>Real-time market analytics help you list or purchase at the right price.</span>
+                        </li>
+                        <li class="d-flex align-items-start">
+                            <i class="bi bi-headset text-primary me-3 fs-4"></i>
+                            <span>Dedicated support specialists guide you from search to final paperwork.</span>
+                        </li>
+                    </ul>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="#statistics" class="btn btn-primary btn-lg">
+                            <i class="bi bi-bar-chart"></i> See Our Impact
+                        </a>
+                        <a href="#buy-cars" class="btn btn-outline-light btn-lg">
+                            <i class="bi bi-compass"></i> Start Exploring
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block">
+                    <img src="img/image4.jpg" alt="LuxAuto Experience" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics & Achievements Section -->
+    <section id="statistics" class="statistics-section section-transition py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold text-white">Statistics &amp; Achievements</h2>
+                <p class="lead text-light">Proof that LuxAuto is the most trusted vehicle marketplace</p>
+            </div>
+            <div class="row g-4">
+                <!-- Stat 1 -->
+                <div class="col-6 col-lg-3">
+                    <div class="stat-card text-center">
+                        <h3 class="display-4 fw-bold text-white">62K+</h3>
+                        <p class="text-light mb-0">Vehicles traded in the last 12 months</p>
+                    </div>
+                </div>
+                
+                <!-- Stat 2 -->
+                <div class="col-6 col-lg-3">
+                    <div class="stat-card text-center">
+                        <h3 class="display-4 fw-bold text-white">4.9/5</h3>
+                        <p class="text-light mb-0">Average customer satisfaction score</p>
+                    </div>
+                </div>
+                
+                <!-- Stat 3 -->
+                <div class="col-6 col-lg-3">
+                    <div class="stat-card text-center">
+                        <h3 class="display-4 fw-bold text-white">320+</h3>
+                        <p class="text-light mb-0">Trusted dealer partners worldwide</p>
+                    </div>
+                </div>
+                
+                <!-- Stat 4 -->
+                <div class="col-6 col-lg-3">
+                    <div class="stat-card text-center">
+                        <h3 class="display-4 fw-bold text-white">$1.2B</h3>
+                        <p class="text-light mb-0">Total transaction volume processed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Buy Cars Section -->
+    <section id="buy-cars" class="buy-cars-section section-transition py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold text-white">Buy Your Dream Car</h2>
+                <p class="lead text-light">Explore our extensive collection of premium vehicles</p>
+            </div>
+            
+            <div class="row g-4 mb-5">
+                <!-- Feature 1 -->
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon bg-primary text-white rounded-circle mx-auto mb-3">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h4 class="text-white mb-3">Verified Vehicles</h4>
+                        <p class="text-light">All cars undergo thorough inspection and verification before listing</p>
+                    </div>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon bg-success text-white rounded-circle mx-auto mb-3">
+                            <i class="bi bi-cash-stack"></i>
+                        </div>
+                        <h4 class="text-white mb-3">Best Prices</h4>
+                        <p class="text-light">Competitive pricing with transparent cost breakdown and no hidden fees</p>
+                    </div>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon bg-info text-white rounded-circle mx-auto mb-3">
+                            <i class="bi bi-headset"></i>
+                        </div>
+                        <h4 class="text-white mb-3">24/7 Support</h4>
+                        <p class="text-light">Round-the-clock customer service to assist with your purchase</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CTA Button -->
+            <div class="text-center">
+                <a href="#sell-cars" class="btn btn-primary btn-lg">
+                    Browse Listings <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sell Cars Section -->
+    <section id="sell-cars" class="sell-cars-section section-transition py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold text-white">Sell Your Car with Ease</h2>
+                <p class="lead text-light">Get the best value for your vehicle with our simple process</p>
+            </div>
+            
+            <div class="row g-4 align-items-center mb-5">
+                <!-- Steps Column -->
+                <div class="col-lg-6">
+                    <div class="selling-steps">
+                        <!-- Step 1 -->
+                        <div class="selling-step d-flex mb-4">
+                            <div class="step-number bg-primary text-white rounded-circle me-3">
+                                <span>1</span>
+                            </div>
+                            <div>
+                                <h5 class="text-white mb-2">List Your Vehicle</h5>
+                                <p class="text-light mb-0">Create a detailed listing with photos and specifications</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 2 -->
+                        <div class="selling-step d-flex mb-4">
+                            <div class="step-number bg-success text-white rounded-circle me-3">
+                                <span>2</span>
+                            </div>
+                            <div>
+                                <h5 class="text-white mb-2">Get Verified</h5>
+                                <p class="text-light mb-0">We verify your vehicle's authenticity and condition</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 3 -->
+                        <div class="selling-step d-flex mb-4">
+                            <div class="step-number bg-info text-white rounded-circle me-3">
+                                <span>3</span>
+                            </div>
+                            <div>
+                                <h5 class="text-white mb-2">Connect with Buyers</h5>
+                                <p class="text-light mb-0">Receive offers from interested buyers on our platform</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 4 -->
+                        <div class="selling-step d-flex mb-4">
+                            <div class="step-number bg-warning text-white rounded-circle me-3">
+                                <span>4</span>
+                            </div>
+                            <div>
+                                <h5 class="text-white mb-2">Complete the Sale</h5>
+                                <p class="text-light mb-0">We handle all paperwork and ensure a smooth transaction</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Benefits Column -->
+                <div class="col-lg-6">
+                    <div class="card selling-benefits-card border-0 shadow-lg">
+                        <div class="card-body p-4">
+                            <h4 class="mb-4">Why Sell With Us?</h4>
+                            
+                            <div class="benefit-item d-flex align-items-start mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-3 fs-5"></i>
+                                <div>
+                                    <h6 class="mb-1">No Listing Fees</h6>
+                                    <p class="text-muted mb-0 small">List your vehicle for free with no upfront costs</p>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit-item d-flex align-items-start mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-3 fs-5"></i>
+                                <div>
+                                    <h6 class="mb-1">Wide Reach</h6>
+                                    <p class="text-muted mb-0 small">Access to millions of potential buyers nationwide</p>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit-item d-flex align-items-start mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-3 fs-5"></i>
+                                <div>
+                                    <h6 class="mb-1">Quick Sales</h6>
+                                    <p class="text-muted mb-0 small">Most vehicles sell within 2-3 weeks</p>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit-item d-flex align-items-start mb-3">
+                                <i class="bi bi-check-circle-fill text-success me-3 fs-5"></i>
+                                <div>
+                                    <h6 class="mb-1">Secure Payments</h6>
+                                    <p class="text-muted mb-0 small">Protected transactions with escrow service</p>
+                                </div>
+                            </div>
+                            
+                            <div class="benefit-item d-flex align-items-start">
+                                <i class="bi bi-check-circle-fill text-success me-3 fs-5"></i>
+                                <div>
+                                    <h6 class="mb-1">Expert Support</h6>
+                                    <p class="text-muted mb-0 small">Dedicated team to guide you through the process</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CTA Button -->
+            <div class="text-center">
+                <a href="../sell/sell.html" class="btn btn-primary btn-lg">
+                    Start Selling Now <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners / Brands Section -->
+    <section id="partners" class="partners-section section-transition py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold text-white">Our Trusted Partners</h2>
+                <p class="lead text-light">We collaborate with leading manufacturers and dealerships worldwide</p>
+            </div>
+            <div class="row g-4 align-items-stretch">
+                <!-- Partner 1 -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="partner-card">
+                        <img src="../img/Ferrari_logo.png" alt="Ferrari" class="img-fluid">
+                        <div class="partner-content">
+                            <h5 class="partner-name">Ferrari</h5>
+                            <p class="partner-description">Hand-built Italian supercars with uncompromising track pedigree.</p>
+                            <a href="../pages/browse.html#ferrari" class="partner-link">Explore Ferrari</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Partner 2 -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="partner-card">
+                        <img src="../img/Bugatti_logo.png" alt="Bugatti" class="img-fluid">
+                        <div class="partner-content">
+                            <h5 class="partner-name">Bugatti</h5>
+                            <p class="partner-description">Record-breaking hypercars that unite artistry and engineering.</p>
+                            <a href="../pages/browse.html#bugatti" class="partner-link">Discover Bugatti</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Partner 3 -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="partner-card">
+                        <img src="../img/Lamborghini_logo.png" alt="Lamborghini" class="img-fluid">
+                        <div class="partner-content">
+                            <h5 class="partner-name">Lamborghini</h5>
+                            <p class="partner-description">Dramatic design and V12 performance built for the spotlight.</p>
+                            <a href="../pages/browse.html#lamborghini" class="partner-link">View Lamborghini</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Partner 4 -->
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <div class="partner-card">
+                        <img src="../img/Rolls_Royce_logo.jpg" alt="Rolls-Royce" class="img-fluid">
+                        <div class="partner-content">
+                            <h5 class="partner-name">Rolls-Royce</h5>
+                            <p class="partner-description">Bespoke craftsmanship that redefines modern luxury travel.</p>
+                            <a href="../pages/browse.html#rolls-royce" class="partner-link">Experience Rolls-Royce</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Reviews Section -->
+    <section id="reviews" class="testimonials-section section-transition py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold text-white">Customer Reviews</h2>
+                <p class="lead text-light">Real experiences from satisfied buyers and sellers</p>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Testimonial 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card testimonial-card h-100 border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="stars text-warning mb-3">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                            </div>
+                            <p class="card-text mb-3">
+                                "Found my dream car at an amazing price! The process was smooth and the team was very helpful throughout."
+                            </p>
+                            <div class="d-flex align-items-center">
+                                <div class="avatar bg-primary text-white rounded-circle me-3">JD</div>
+                                <div>
+                                    <h6 class="mb-0">John Doe</h6>
+                                    <small class="text-muted">Purchased BMW X5</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card testimonial-card h-100 border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="stars text-warning mb-3">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                            </div>
+                            <p class="card-text mb-3">
+                                "Sold my car in just 3 days! The platform made listing easy and I got a great price. Highly recommend!"
+                            </p>
+                            <div class="d-flex align-items-center">
+                                <div class="avatar bg-success text-white rounded-circle me-3">SM</div>
+                                <div>
+                                    <h6 class="mb-0">Sarah Miller</h6>
+                                    <small class="text-muted">Sold Honda Accord</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card testimonial-card h-100 border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="stars text-warning mb-3">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-half"></i>
+                            </div>
+                            <p class="card-text mb-3">
+                                "Great selection of verified vehicles. The customer support team answered all my questions promptly."
+                            </p>
+                            <div class="d-flex align-items-center">
+                                <div class="avatar bg-info text-white rounded-circle me-3">MJ</div>
+                                <div>
+                                    <h6 class="mb-0">Michael Johnson</h6>
+                                    <small class="text-muted">Purchased Tesla Model 3</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CTA Button -->
+            <div class="text-center mt-5">
+                <a href="../testimonials.html" class="btn btn-primary btn-lg">
+                    Read More Reviews <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </section>
+
+    <!-- Blog / News Section -->
+    <section id="blog" class="blog-section section-transition py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="display-4 fw-bold text-white">Latest From The Blog</h2>
+                    <p class="lead text-light">Stay updated with industry insights and LuxAuto news</p>
+                </div>
+                <div class="row g-4">
+                    <!-- Blog Post 1 -->
+                    <div class="col-md-4">
+                        <div class="card blog-card h-100 border-0 shadow-sm">
+                            <img src="../img/image2.jpg" class="card-img-top" alt="Hybrid Vehicles">
+                            <div class="card-body">
+                                <h5 class="card-title">Top Hybrid Cars To Watch In 2025</h5>
+                                <p class="card-text text-muted">Discover the most efficient and stylish hybrid vehicles entering the market.</p>
+                                <a href="../blog.html" class="stretched-link">Read Article</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Blog Post 2 -->
+                    <div class="col-md-4">
+                        <div class="card blog-card h-100 border-0 shadow-sm">
+                            <img src="../img/image3.jpg" class="card-img-top" alt="Luxury Market">
+                            <div class="card-body">
+                                <h5 class="card-title">Luxury Market Trends You Should Know</h5>
+                                <p class="card-text text-muted">See how luxury automotive demand is evolving across regions worldwide.</p>
+                                <a href="../blog.html" class="stretched-link">Read Article</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Blog Post 3 -->
+                    <div class="col-md-4">
+                        <div class="card blog-card h-100 border-0 shadow-sm">
+                            <img src="../img/image1.jpg" class="card-img-top" alt="Selling Advice">
+                            <div class="card-body">
+                                <h5 class="card-title">A Seller's Checklist For Faster Deals</h5>
+                                <p class="card-text text-muted">Follow these simple steps to prepare your car and close deals quickly.</p>
+                                <a href="../blog.html" class="stretched-link">Read Article</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq-section section-transition py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="display-4 fw-bold text-white">Frequently Asked Questions</h2>
+                    <p class="lead text-light">Answers to the most common questions from our community</p>
+                </div>
+                <div class="accordion" id="faqAccordion">
+                    <!-- FAQ Item 1 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faqHeadingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseOne" aria-expanded="false" aria-controls="faqCollapseOne">
+                                How does LuxAuto verify vehicles before listing?
+                            </button>
+                        </h2>
+                        <div id="faqCollapseOne" class="accordion-collapse collapse" aria-labelledby="faqHeadingOne" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body faq-answer">
+                                We collaborate with certified inspectors who review ownership documents, maintenance history, and conduct in-person assessments before approving any listing.
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 2 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faqHeadingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseTwo" aria-expanded="false" aria-controls="faqCollapseTwo">
+                                What fees should I expect when selling my car?
+                            </button>
+                        </h2>
+                        <div id="faqCollapseTwo" class="accordion-collapse collapse" aria-labelledby="faqHeadingTwo" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body faq-answer">
+                                Listing your vehicle is free. A small success fee is deducted only after the sale is completed, ensuring you pay nothing upfront.
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 3 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faqHeadingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseThree" aria-expanded="false" aria-controls="faqCollapseThree">
+                                Can LuxAuto help me arrange financing?
+                            </button>
+                        </h2>
+                        <div id="faqCollapseThree" class="accordion-collapse collapse" aria-labelledby="faqHeadingThree" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body faq-answer">
+                                Yes, we partner with reputable banks and credit unions to present tailored financing offers once you select a vehicle.
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FAQ Item 4 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faqHeadingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseFour" aria-expanded="false" aria-controls="faqCollapseFour">
+                                How quickly can I get support if I encounter an issue?
+                            </button>
+                        </h2>
+                        <div id="faqCollapseFour" class="accordion-collapse collapse" aria-labelledby="faqHeadingFour" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body faq-answer">
+                                Our support specialists are available 24/7 via chat, phone, or email, with average response times under five minutes.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- Newsletter Subscription Section -->
+    <section id="newsletter" class="newsletter-section section-transition py-5">
+            <div class="container">
+                <div class="newsletter-content text-center mx-auto">
+                    <h2 class="display-5 fw-bold text-white mb-3">Join Our Gmail Newsletter</h2>
+                    <p class="text-light mb-3 mb-lg-4">Subscribe with your Gmail account to receive curated vehicle drops, price alerts, and ownership tips every week.</p>
+                    <form id="newsletterForm" class="newsletter-form">
+                        <div class="input-group input-group-lg">
+                            <input type="email" class="form-control" placeholder="Enter your Gmail address" required>
+                            <button class="btn btn-primary" type="submit">
+                                <i class="bi bi-send-fill"></i> Subscribe
+                            </button>
+                        </div>
+                        <small class="text-light d-block mt-2">Tip: We recommend using Gmail for the fastest updates and filters.</small>
+                    </form>
+                    <a href="https://mail.google.com" target="_blank" rel="noopener" class="btn btn-outline-light btn-lg">
+                        <i class="bi bi-envelope-open"></i> Open Gmail
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    <!-- Mobile App Preview Section -->
+    <section id="app" class="app-section section-transition py-5">
+            <div class="container">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-6">
+                        <h2 class="display-4 fw-bold text-white mb-4">LuxAuto Mobile App</h2>
+                        <p class="text-light mb-4">Manage your listings, chat with buyers, and track offers on the go with our upcoming mobile experience.</p>
+                        <div class="d-flex flex-column flex-sm-row gap-3">
+                            <a href="#" class="btn btn-primary btn-lg app-store-btn">
+                                <i class="bi bi-google-play"></i> Google Play
+                            </a>
+                            <a href="#" class="btn btn-outline-light btn-lg app-store-btn">
+                                <i class="bi bi-apple"></i> App&nbsp;Store
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="app-phone mockup">
+                            <img src="../img/available_on_mobile.jpeg" alt="App Preview" class="img-fluid rounded-4 shadow-lg">
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="qr-placeholder text-center">
+                            <div class="qr-box mb-3">
+                                <span>QR PREVIEW</span>
+                            </div>
+                            <p class="text-light mb-0">Scan to preview the prototype in your browser.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section section-transition py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold text-white">Get In Touch</h2>
+                <p class="lead text-light">Have questions? We're here to help!</p>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Contact Info -->
+                <div class="col-lg-5">
+                    <div class="contact-info">
+                        <h4 class="mb-4 text-white">Contact Information</h4>
+                        
+                        <div class="contact-item d-flex mb-4">
+                            <div class="contact-icon bg-primary text-white rounded me-3">
+                                <i class="bi bi-geo-alt"></i>
+                            </div>
+                            <div>
+                                <h6 class="text-white">Address</h6>
+                                <p class="text-light mb-0">123 Auto Street, Car City, CC 12345</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item d-flex mb-4">
+                            <div class="contact-icon bg-success text-white rounded me-3">
+                                <i class="bi bi-telephone"></i>
+                            </div>
+                            <div>
+                                <h6 class="text-white">Phone</h6>
+                                <p class="text-light mb-0">+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item d-flex mb-4">
+                            <div class="contact-icon bg-info text-white rounded me-3">
+                                <i class="bi bi-envelope"></i>
+                            </div>
+                            <div>
+                                <h6 class="text-white">Email</h6>
+                                <p class="text-light mb-0">support@LuxAuto.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item d-flex mb-4">
+                            <div class="contact-icon bg-warning text-white rounded me-3">
+                                <i class="bi bi-clock"></i>
+                            </div>
+                            <div>
+                                <h6 class="text-white">Business Hours</h6>
+                                <p class="text-light mb-0">Mon - Fri: 9:00 AM - 6:00 PM<br>Sat - Sun: 10:00 AM - 4:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="col-lg-7">
+                    <div class="card border-0 shadow-sm contact-form-card">
+                        <div class="card-body p-4">
+                            <form id="contactForm" class="contact-form-dark">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="firstName" class="form-label">First Name</label>
+                                        <input type="text" class="form-control" id="firstName" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="lastName" class="form-label">Last Name</label>
+                                        <input type="text" class="form-control" id="lastName" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="phone" class="form-label">Phone</label>
+                                        <input type="tel" class="form-control" id="phone">
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="subject" class="form-label">Subject</label>
+                                        <input type="text" class="form-control" id="subject" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="message" class="form-label">Message</label>
+                                        <textarea class="form-control" id="message" rows="5" required></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary btn-lg w-100">
+                                            <i class="bi bi-send"></i> Send Message
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row gy-5 footer-main">
+                <div class="col-lg-4 col-md-6">
+                    <a href="#landingAnimation" class="footer-brand d-inline-flex align-items-center text-decoration-none">
+                        <i class="bi bi-lightning-charge-fill me-2"></i>
+                        <span>LuxAuto</span>
+                    </a>
+                    <p class="footer-description mt-3">
+                        Curated vehicles, verified sellers, and concierge-level support. LuxAuto makes buying or selling your next car transparent, secure, and enjoyable.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Visit LuxAuto on Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" aria-label="Visit LuxAuto on Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" aria-label="Visit LuxAuto on Twitter"><i class="bi bi-twitter"></i></a>
+                        <a href="#" aria-label="Visit LuxAuto on LinkedIn"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="footer-title">Explore</h6>
+                    <ul class="footer-nav">
+                        <li><a href="#featured">Featured Vehicles</a></li>
+                        <li><a href="#buy-cars">Buy Cars</a></li>
+                        <li><a href="#sell-cars">Sell Cars</a></li>
+                        <li><a href="#blog">Industry News</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="footer-title">Support</h6>
+                    <ul class="footer-nav">
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="../financing.html">Financing</a></li>
+                        <li><a href="../login/login.html">Dealer Portal</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="footer-title">Stay Informed</h6>
+                    <p class="footer-cta mb-3">Get price alerts, launch updates, and curated inventory delivered weekly.</p>
+                    <a href="#newsletter" class="btn btn-primary btn-sm">Join the Newsletter</a>
+                    <div class="mt-3 footer-cta">
+                        <i class="bi bi-headset me-2"></i><span>Need help? <a href="#contact" class="text-decoration-none text-white">Talk with our advisors</a>.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="row footer-bottom align-items-center g-3">
+                <div class="col-md-6 text-center text-md-start">
+                    <span>&copy; 2025 LuxAuto. Crafted for modern drivers.</span>
+                </div>
+                <div class="col-md-6">
+                    <div class="footer-bottom-links">
+                        <a href="../pages/privacy.html">Privacy Policy</a>
+                        <a href="../pages/terms.html">Terms of Service</a>
+                        <a href="#partners">Our Partners</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="btn btn-primary back-to-top">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <!-- Bootstrap 5 JS Bundle (local) -->
+    <script src="../bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="main.js"></script>
+</body>
+</html>

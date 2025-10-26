@@ -30,7 +30,7 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-.center-area { width: 100%; max-width: 520px; padding: 84px 22px 44px; margin: 0 auto; position: relative; z-index: 2; }
+.center-area { width: 100%; max-width: 520px; padding: 36px 22px 44px; margin: 0 auto; position: relative; z-index: 2; }
 
 /* Header / brand styles (auth pages) */
 .site-header {
@@ -79,7 +79,7 @@ body {
 .btn-register {
   display: inline-block;
   background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
   color: #fff !important;
   padding: 10px 18px;
   border-radius: 28px;
@@ -90,7 +90,7 @@ body {
 .btn-register:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(11,94,215,0.22); }
 
 /* Prevent the card from visually bleeding into footer: ensure adequate bottom spacing */
-.center-area { padding: 84px 22px 120px; }
+.center-area { padding: 36px 22px 120px; }
 
 /* Footer visual polish: subtle, matching theme */
 .site-footer {
@@ -106,7 +106,7 @@ body {
 
 .card {
   background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
   border-radius: 16px;
   padding: 28px;
   box-shadow: 0 12px 40px rgba(0,0,0,0.6);
@@ -126,7 +126,7 @@ body {
 .label-text i { color: #66a6ff; }
 
 input[type="email"], input[type="password"], input[type="text"] {
-  width:100%; padding:12px 14px; border-radius:10px; border:1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); color:#fff; outline:none;
+  width:100%; padding:12px 14px; border-radius:10px; border:1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.02); color:#fff; outline:none;
 }
 
 input:focus { box-shadow: 0 0 0 6px rgba(11,94,215,0.06); border-color: rgba(11,94,215,0.6); }
@@ -135,7 +135,7 @@ input:focus { box-shadow: 0 0 0 6px rgba(11,94,215,0.06); border-color: rgba(11,
 .toggle-password { position:absolute; right:6px; top:50%; transform: translateY(-50%); background:transparent; border:none; color: #cfcfcf; }
 
 .actions-row { margin-top: 12px; }
-.btn-login { width:100%; padding:12px 16px; border-radius:10px; background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); color:#fff; }
+.btn-login { width:100%; padding:12px 16px; border-radius:10px; background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.18); color:#fff; }
 .btn-login:disabled { opacity:0.6; }
 
 .register-section { margin-top: 16px; text-align:center; }
@@ -177,7 +177,7 @@ input:focus { box-shadow: 0 0 0 6px rgba(11,94,215,0.06); border-color: rgba(11,
   align-items:center; 
   justify-content:center; 
   gap:10px;
-  border:1px solid rgba(255,255,255,0.06); 
+  border:1px solid rgba(255,255,255,0.18); 
   background: rgba(255,255,255,0.02); 
   color:#fff;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -278,7 +278,7 @@ body {
   --accent-gold:  #caa052;           /* luxury accent */
   --text-muted:   rgba(255,255,255,0.65);
   --glass-bg:     rgba(255,255,255,0.04);
-  --glass-brd:    rgba(255,255,255,0.08);
+  --glass-brd:    rgba(255,255,255,0.18);
 }
 
 body {
@@ -311,7 +311,7 @@ body {
   border-color: rgba(11,94,215,0.35);
 }
 
-.center-area { max-width: 460px; padding:84px 22px 44px; }
+.center-area { max-width: 460px; padding:36px 22px 44px; }
 
 .card {
   position:relative;
@@ -355,7 +355,7 @@ input:focus {
   background: linear-gradient(180deg, #1152c2, #0b3a85);
   color:#eef2f7;
   box-shadow: 0 10px 26px rgba(13,71,161,0.22);
-  border:1px solid rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.18);
 }
 .btn-primary:hover:not(:disabled) { filter:brightness(1.02); box-shadow: 0 12px 30px rgba(13,71,161,0.28); transform: translateY(-1px); }
 
@@ -368,7 +368,7 @@ input:focus {
 .links-row a { color: var(--text-muted); }
 .or { letter-spacing:.2px; }
 
-.social { border-radius:10px; border:1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.03); backdrop-filter: blur(3px); }
+.social { border-radius:10px; border:1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.03); backdrop-filter: blur(3px); }
 .social.x { background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.015)); }
 .social.x:hover { background:rgba(255,255,255,0.05); }
 
