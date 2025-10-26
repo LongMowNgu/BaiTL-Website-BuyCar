@@ -14,17 +14,17 @@ body {
 .page-bg { position: fixed; inset:0; z-index:0; pointer-events:none; }
 .center-area { width:100%; max-width:560px; padding:36px 22px 44px; margin:0 auto; z-index:2; }
 
-.register-card { background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.18); border-radius:16px; padding:22px; box-shadow: 0 12px 40px rgba(0,0,0,0.55); }
+.register-card { background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.95); border-radius:16px; padding:22px; box-shadow: 0 12px 40px rgba(0,0,0,0.55); }
 .register-card h2 { color:#fff; margin-bottom:10px; }
 
 .input-label { display:block; font-size:13px; color: rgba(255,255,255,0.85); margin-bottom:8px; display:flex; gap:8px; align-items:center; }
-.form-control { border-radius:10px; padding:12px 14px; border:1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.02); color:#fff; }
+.form-control { border-radius:10px; padding:12px 14px; border:1px solid rgba(255,255,255,0.95); background: rgba(255,255,255,0.02); color:#fff; }
 .form-control:focus { box-shadow: 0 0 0 6px rgba(11,94,215,0.06); border-color: rgba(11,94,215,0.6); }
 
 .password-wrapper { position: relative; }
 .toggle-password { position:absolute; right:8px; top:50%; transform:translateY(-50%); background:transparent; border:none; color:#cfcfcf; }
 
-.btn-register-submit { width:100%; padding:12px 16px; border-radius:10px; background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.18); color:#fff; }
+.btn-register-submit { width:100%; padding:12px 16px; border-radius:10px; background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.95); color:#fff; }
 .btn-back-login { width:100%; padding:10px 12px; border-radius:10px; }
 
 .register-card.revealed { animation: cardIn 520ms cubic-bezier(.2,.8,.2,1) forwards; }
@@ -120,7 +120,7 @@ body {
   color:#fff; border:none; box-shadow: 0 10px 26px rgba(13,71,161,0.22);
 }
 .btn-register-submit:hover { transform: translateY(-2px); filter:brightness(1.03); }
-.btn-back-login { background: transparent; color: var(--light-color); border:1px solid rgba(255,255,255,0.18); }
+.btn-back-login { background: transparent; color: var(--light-color); border:1px solid rgba(255,255,255,0.95); }
 .btn-back-login:hover { background: rgba(255,255,255,0.02); }
 
 /* validation icon */

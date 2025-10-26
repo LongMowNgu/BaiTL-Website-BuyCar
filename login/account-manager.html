@@ -12,7 +12,7 @@
     /* Account manager overrides to match index dark/glass theme */
     body { background: inherit; min-height:100vh; padding: 32px 0; }
     .container { max-width: 1200px; }
-    .card { background: var(--glass-bg, rgba(255,255,255,0.03)); border:1px solid var(--glass-brd, rgba(255,255,255,0.18)); border-radius:12px; color: #eef2f7; box-shadow: 0 10px 36px rgba(0,0,0,0.6); margin-bottom: 20px; }
+  .card { background: var(--glass-bg, rgba(255,255,255,0.03)); border:1px solid var(--glass-brd, rgba(255,255,255,0.95)); border-radius:12px; color: #eef2f7; box-shadow: 0 10px 36px rgba(0,0,0,0.6); margin-bottom: 20px; }
     .card-header { background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); color: #fff; border-radius: 12px 12px 0 0 !important; padding: 18px; }
     .user-info { background: rgba(255,255,255,0.02); padding: 15px; border-radius: 10px; margin-bottom: 15px; color: #eef2f7; }
     .btn-logout { background: linear-gradient(135deg, #0b5ed7, #66a6ff); color: #fff; border:1px solid rgba(255,255,255,0.12); }
@@ -85,6 +85,21 @@
       </div>
     </div>
   </div>
+
+    <!-- Contact Messages Section -->
+    <div class="card" id="contactsCard">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h4 class="mb-0"><i class="fa-solid fa-envelope"></i> Contact Messages</h4>
+        <button class="btn btn-light btn-sm" onclick="refreshContacts()">
+          <i class="fa-solid fa-refresh"></i> Refresh
+        </button>
+      </div>
+      <div class="card-body">
+        <div id="contactsContent">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
 
   <script src="auth.js"></script>
   <script>
@@ -259,10 +274,69 @@
       displayUsers();
     }
 
+    // Contacts helpers
+    function getContacts() {
+      return JSON.parse(localStorage.getItem('contacts') || '[]');
+    }
+
+    function displayContacts() {
+      const contacts = getContacts();
+      const container = document.getElementById('contactsContent');
+      if (!container) return;
+      if (contacts.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <i class="fa-solid fa-envelope-open-text"></i>
+            <h5>No messages</h5>
+            <p>Contact form has no messages yet.</p>
+          </div>
+        `;
+        return;
+      }
+
+      let html = `<div class="list-group">`;
+      contacts.forEach(msg => {
+        const date = new Date(msg.createdAt).toLocaleString();
+        html += `
+          <div class="list-group-item list-group-item-dark d-flex justify-content-between align-items-start">
+            <div>
+              <strong>${msg.name}</strong> <small class="text-muted">&lt;${msg.email}&gt;</small>
+              <div class="small text-muted">${date}</div>
+              <div class="mt-2">${escapeHtml(msg.message)}</div>
+            </div>
+            <div class="ms-3 text-end">
+              <button class="btn btn-sm btn-danger mb-2" onclick="deleteContact(${msg.id})"><i class="fa-solid fa-trash"></i></button>
+            </div>
+          </div>
+        `;
+      });
+      html += `</div>`;
+      container.innerHTML = html;
+    }
+
+    function deleteContact(id) {
+      if (!confirm('Delete this message?')) return;
+      let contacts = getContacts();
+      contacts = contacts.filter(c => c.id !== id);
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+      displayContacts();
+      alert('Message deleted');
+    }
+
+    function refreshContacts() {
+      displayContacts();
+    }
+
+    function escapeHtml(s) {
+      if (!s) return '';
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
     // Initialize on page load
     document.addEventListener('DOMContentLoaded', () => {
       displayCurrentUser();
       displayUsers();
+      displayContacts();
     });
   </script>
 </body>
