@@ -6,61 +6,22 @@
   <title>Account Management - AutoTrade</title>
   <link href="../bootstrap-5.3.8-dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Shared site theme -->
+  <link rel="stylesheet" href="../index/styles.css">
   <style>
-    body {
-      background: linear-gradient(135deg, #0a0d14 0%, #1a1d2e 100%);
-      min-height: 100vh;
-      padding: 40px 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    .container {
-      max-width: 1200px;
-    }
-    .card {
-      background: rgba(255, 255, 255, 0.95);
-      border: none;
-      border-radius: 15px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      margin-bottom: 20px;
-    }
-    .card-header {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      border-radius: 15px 15px 0 0 !important;
-      padding: 20px;
-    }
-    .user-info {
-      background: #f8f9fa;
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
-    .btn-logout {
-      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-      color: white;
-      border: none;
-    }
-    .btn-logout:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(245, 87, 108, 0.4);
-    }
-    .table {
-      background: white;
-    }
-    .badge-user {
-      font-size: 0.9rem;
-      padding: 8px 12px;
-    }
-    .empty-state {
-      text-align: center;
-      padding: 40px;
-      color: #6c757d;
-    }
-    .empty-state i {
-      font-size: 4rem;
-      margin-bottom: 20px;
-      opacity: 0.3;
-    }
+    /* Account manager overrides to match index dark/glass theme */
+    body { background: inherit; min-height:100vh; padding: 32px 0; }
+    .container { max-width: 1200px; }
+    .card { background: var(--glass-bg, rgba(255,255,255,0.03)); border:1px solid var(--glass-brd, rgba(255,255,255,0.18)); border-radius:12px; color: #eef2f7; box-shadow: 0 10px 36px rgba(0,0,0,0.6); margin-bottom: 20px; }
+    .card-header { background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); color: #fff; border-radius: 12px 12px 0 0 !important; padding: 18px; }
+    .user-info { background: rgba(255,255,255,0.02); padding: 15px; border-radius: 10px; margin-bottom: 15px; color: #eef2f7; }
+    .btn-logout { background: linear-gradient(135deg, #0b5ed7, #66a6ff); color: #fff; border:1px solid rgba(255,255,255,0.12); }
+    .btn-logout:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(11,94,215,0.26); }
+    .table { background: transparent; color: #eef2f7; }
+    .table thead { color: #eef2f7; }
+    .badge-user { font-size: 0.9rem; padding: 8px 12px; }
+    .empty-state { text-align: center; padding: 40px; color: var(--text-muted, rgba(255,255,255,0.6)); }
+    .empty-state i { font-size: 4rem; margin-bottom: 20px; opacity: 0.35; }
   </style>
 </head>
 <body>
