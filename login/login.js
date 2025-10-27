@@ -1,8 +1,8 @@
 // ===================================
 // Login Page Script - AutoTrade
 // ===================================
-// Purpose: Client-side validation, remember me functionality, and demo authentication
-// Mục đích: Kiểm tra đầu vào, tính năng ghi nhớ, và xác thực demo
+// Purpose: Client-side validation, remember me functionality, and authentication using localStorage
+// Note: auth.js must be loaded before this script
 
 // ===================================
 // DOM Elements
@@ -20,11 +20,6 @@ const loadingOverlay = document.getElementById('loadingOverlay');
 const successOverlay = document.getElementById('successOverlay');
 
 // ===================================
-// Configuration
-// ===================================
-const VALID_EMAIL = 'long@gmail.com'; // Demo email
-
-// ===================================
 // Toggle Password Visibility
 // ===================================
 if (togglePassword) {
@@ -38,9 +33,45 @@ if (togglePassword) {
 }
 
 // ===================================
-// Load Remembered Email
+// Load Remembered Email & Check if Already Logged In
 // ===================================
 window.addEventListener('DOMContentLoaded', () => {
+  // Check if user is already logged in
+  const currentUser = getCurrentUser();
+  if (currentUser) {
+    // If a session exists, show a non-blocking notice with actions instead of auto-redirecting.
+    console.log('User already logged in:', currentUser);
+    showAlert(`You're already logged in as ${currentUser.fullname} (${currentUser.email}).`, 'success');
+
+    // Create action buttons (Continue / Logout) and append to alert
+    const actionContainer = document.createElement('div');
+    actionContainer.style.marginTop = '10px';
+    actionContainer.style.display = 'flex';
+    actionContainer.style.gap = '8px';
+    actionContainer.style.justifyContent = 'center';
+
+    const continueLink = document.createElement('a');
+    continueLink.href = '../index/index.html';
+    continueLink.className = 'btn btn-sm btn-primary';
+    continueLink.textContent = 'Continue to site';
+
+    const logoutButton = document.createElement('button');
+    logoutButton.type = 'button';
+    logoutButton.className = 'btn btn-sm btn-outline-light';
+    logoutButton.textContent = 'Logout';
+    logoutButton.addEventListener('click', () => {
+      logout();
+      // Reload to clear UI state
+      location.reload();
+    });
+
+    actionContainer.appendChild(continueLink);
+    actionContainer.appendChild(logoutButton);
+    if (alertEl) alertEl.appendChild(actionContainer);
+    // Do NOT return here so the user can still interact with the form if they want to log in as a different user
+  }
+
+  // Load remembered email
   const rememberedEmail = localStorage.getItem('rememberedEmail');
   if (rememberedEmail) {
     emailEl.value = rememberedEmail;
@@ -94,26 +125,36 @@ loginForm.addEventListener('submit', function(evt){
   const e = emailEl.value.trim().toLowerCase();
   const p = passEl.value.trim();
 
+  console.log('=== Login Form Submit ===');
+  console.log('Email input:', e);
+  console.log('Password input:', p);
+  console.log('Users in storage:', getUsers());
+  
   if (!e || !p) {
-    showAlert('Vui lòng nhập email và mật khẩu!', 'error');
+    showAlert('Please enter email and password!', 'error');
     shakeCard();
     return;
   }
   
   if (!isValidEmail(e)) {
-    showAlert('Email không đúng định dạng!', 'error');
+    showAlert('Invalid email format!', 'error');
     shakeCard();
     return;
   }
   
-  if (e === VALID_EMAIL && p !== '') {
+  // Validate login credentials from localStorage using auth.js functions
+  const loginResult = loginUser(e, p);
+  console.log('Login result:', loginResult);
+  
+  if (loginResult.success) {
+    // Login successful
     if (rememberMeCheckbox && rememberMeCheckbox.checked) {
       localStorage.setItem('rememberedEmail', e);
     } else {
       localStorage.removeItem('rememberedEmail');
     }
     
-    showAlert('Đăng nhập thành công!', 'success');
+    showAlert(loginResult.message, 'success');
     
     if (loadingOverlay) {
       loadingOverlay.classList.remove('hidden');
@@ -132,7 +173,7 @@ loginForm.addEventListener('submit', function(evt){
       }, 1200);
     }, 800);
   } else {
-    showAlert('Email hoặc mật khẩu không đúng.', 'error');
+    showAlert(loginResult.message, 'error');
     shakeCard();
   }
 });
@@ -142,13 +183,13 @@ loginForm.addEventListener('submit', function(evt){
 // ===================================
 if (googleBtn) {
   googleBtn.addEventListener('click', function() {
-    showAlert('Tính năng đăng nhập Google đang phát triển...', 'success');
+    showAlert('Google login feature is under development...', 'success');
   });
 }
 
 if (xBtn) {
   xBtn.addEventListener('click', function() {
-    showAlert('Tính năng đăng nhập X (Twitter) đang phát triển...', 'success');
+    showAlert('X (Twitter) login feature is under development...', 'success');
   });
 }
 

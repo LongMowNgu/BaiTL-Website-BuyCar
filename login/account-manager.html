@@ -3,35 +3,166 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Account Management - AutoTrade</title>
+  <title>Account Management - LuxAuto</title>
+  <!-- Bootstrap (local) -->
   <link href="../bootstrap-5.3.8-dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <!-- Shared site theme -->
-  <link rel="stylesheet" href="../index/styles.css">
+  <!-- Shared styles -->
+  <link rel="stylesheet" href="auth-shared.css">
   <style>
-    /* Account manager overrides to match index dark/glass theme */
-    body { background: inherit; min-height:100vh; padding: 32px 0; }
-    .container { max-width: 1200px; }
-  .card { background: var(--glass-bg, rgba(255,255,255,0.03)); border:1px solid var(--glass-brd, rgba(255,255,255,0.95)); border-radius:12px; color: #eef2f7; box-shadow: 0 10px 36px rgba(0,0,0,0.6); margin-bottom: 20px; }
-    .card-header { background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); color: #fff; border-radius: 12px 12px 0 0 !important; padding: 18px; }
-    .user-info { background: rgba(255,255,255,0.02); padding: 15px; border-radius: 10px; margin-bottom: 15px; color: #eef2f7; }
-    .btn-logout { background: linear-gradient(135deg, #0b5ed7, #66a6ff); color: #fff; border:1px solid rgba(255,255,255,0.12); }
-    .btn-logout:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(11,94,215,0.26); }
-    .table { background: transparent; color: #eef2f7; }
-    .table thead { color: #eef2f7; }
-    .badge-user { font-size: 0.9rem; padding: 8px 12px; }
-    .empty-state { text-align: center; padding: 40px; color: var(--text-muted, rgba(255,255,255,0.6)); }
-    .empty-state i { font-size: 4rem; margin-bottom: 20px; opacity: 0.35; }
+      /* Page entrance animation */
+      body {
+        animation: pageEnter 1s ease-out;
+      }
+    
+      @keyframes pageEnter {
+        from {
+          opacity: 0;
+          transform: scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    
+      /* Cards stagger animation */
+      .card {
+        animation: cardSlideIn 0.6s ease-out both;
+      }
+    
+      .card:nth-child(1) { animation-delay: 0.1s; }
+      .card:nth-child(2) { animation-delay: 0.2s; }
+      .card:nth-child(3) { animation-delay: 0.3s; }
+      .card:nth-child(4) { animation-delay: 0.4s; }
+    
+      @keyframes cardSlideIn {
+        from {
+          opacity: 0;
+          transform: translateX(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+    
+      /* Table row hover effect */
+      .table tbody tr {
+        transition: all 0.3s ease;
+      }
+    
+      .table tbody tr:hover {
+        transform: translateX(5px);
+        background: rgba(13, 110, 253, 0.1) !important;
+        box-shadow: -4px 0 0 0 rgba(13, 110, 253, 0.6);
+      }
+    
+      /* Button hover scale */
+      .btn {
+        transition: all 0.3s ease;
+      }
+    
+      .btn:hover {
+        transform: translateY(-2px) scale(1.05);
+      }
+    
+    /* Account manager specific styles */
+    body {
+      min-height: 100vh;
+      padding: 80px 0 40px;
+    }
+    .container {
+      max-width: 1200px;
+    }
+    .card {
+      margin-bottom: 24px;
+    }
+    .card-header {
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 18px 24px;
+    }
+    .card-header h4 {
+      margin: 0;
+      color: #fff;
+      font-size: 1.2rem;
+    }
+    .user-info {
+      background: rgba(255,255,255,0.02);
+      padding: 16px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+    }
+    .table {
+      color: #e0e0e0;
+      margin-bottom: 0;
+    }
+    .table thead {
+      background: rgba(255,255,255,0.02);
+      color: #fff;
+    }
+    .table th {
+      border-color: rgba(255,255,255,0.1);
+      padding: 12px;
+    }
+    .table td {
+      border-color: rgba(255,255,255,0.08);
+      padding: 12px;
+    }
+    .badge-user {
+      font-size: 0.85rem;
+      padding: 6px 12px;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: rgba(255,255,255,0.5);
+    }
+    .empty-state i {
+      font-size: 3.5rem;
+      margin-bottom: 16px;
+      opacity: 0.3;
+    }
   </style>
 </head>
 <body>
+  <div class="page-bg"></div>
+  
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: rgb(18, 18, 18); backdrop-filter: blur(10px);">
+    <div class="container d-flex align-items-center">
+      <div class="navbar-left-group d-flex align-items-center me-auto">
+        <button id="landingMenuBtn" class="landing-menu-btn nav-menu-trigger" type="button">
+          <i class="fa fa-bars"></i> MENU
+        </button>
+      </div>
+      <a class="navbar-brand mx-auto" href="../index/index.html" aria-label="LuxAuto home">
+        <img src="../logo/logo9.png" alt="LuxAuto" class="brand-logo" style="height:46px;" />
+      </a>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="../index/index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../contact/contact.html">Contact</a></li>
+          <li class="nav-item">
+            <div class="btn-group ms-lg-2" role="group">
+              <a href="login.html" class="btn btn-auth-outline pill-btn-left">Login</a>
+              <a href="../register/register.html" class="btn btn-auth-solid pill-btn-right">Register</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
   <div class="container">
     <!-- Page Header -->
     <div class="text-center mb-4">
-      <h1 class="text-white mb-2">
-        <i class="fa-solid fa-car"></i> AutoTrade Account Manager
+      <h1 class="title" style="font-size: 2rem;">
+        <i class="fa-solid fa-user-shield"></i> Account Manager
       </h1>
-      <p class="text-white-50">Manage your account and view registered users</p>
+      <p class="subtitle">Manage your account and view registered users</p>
     </div>
 
     <!-- Current User Section -->
@@ -90,9 +221,14 @@
     <div class="card" id="contactsCard">
       <div class="card-header d-flex justify-content-between align-items-center">
         <h4 class="mb-0"><i class="fa-solid fa-envelope"></i> Contact Messages</h4>
-        <button class="btn btn-light btn-sm" onclick="refreshContacts()">
-          <i class="fa-solid fa-refresh"></i> Refresh
-        </button>
+        <div class="d-flex gap-2">
+          <button class="btn btn-success btn-sm" onclick="composeNewReply()">
+            <i class="fa-solid fa-pen-to-square"></i> Ghi phản hồi mới
+          </button>
+          <button class="btn btn-light btn-sm" onclick="refreshContacts()">
+            <i class="fa-solid fa-refresh"></i> Refresh
+          </button>
+        </div>
       </div>
       <div class="card-body">
         <div id="contactsContent">
@@ -294,24 +430,209 @@
         return;
       }
 
-      let html = `<div class="list-group">`;
+      let html = `
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+      `;
+      
       contacts.forEach(msg => {
-        const date = new Date(msg.createdAt).toLocaleString();
+        const dt = msg.createdAt || msg.date;
+        const date = dt ? new Date(dt).toLocaleString() : '-';
+        const statusBadge = getStatusBadge(msg.status || 'new');
+        const hasReply = msg.reply ? '<i class="fa-solid fa-reply text-success"></i>' : '';
+        
         html += `
-          <div class="list-group-item list-group-item-dark d-flex justify-content-between align-items-start">
-            <div>
-              <strong>${msg.name}</strong> <small class="text-muted">&lt;${msg.email}&gt;</small>
-              <div class="small text-muted">${date}</div>
-              <div class="mt-2">${escapeHtml(msg.message)}</div>
-            </div>
-            <div class="ms-3 text-end">
-              <button class="btn btn-sm btn-danger mb-2" onclick="deleteContact(${msg.id})"><i class="fa-solid fa-trash"></i></button>
-            </div>
-          </div>
+          <tr>
+            <td class="text-muted small">${date}</td>
+            <td>${escapeHtml(msg.name)}</td>
+            <td>${escapeHtml(msg.email)}</td>
+            <td>${escapeHtml(msg.subject || 'No subject')}</td>
+            <td>${statusBadge} ${hasReply}</td>
+            <td class="d-flex gap-1 flex-wrap">
+              <button class="btn btn-sm btn-primary" onclick="viewMessage('${msg.id}')" title="View">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+              <button class="btn btn-sm btn-success" onclick="replyToMessage('${msg.id}')" title="Reply">
+                <i class="fa-solid fa-reply"></i>
+              </button>
+              <button class="btn btn-sm btn-warning text-dark" onclick="setContactStatus('${msg.id}','in-progress')" title="Mark In-Progress">
+                <i class="fa-solid fa-hourglass-half"></i>
+              </button>
+              <button class="btn btn-sm btn-secondary" onclick="setContactStatus('${msg.id}','archived')" title="Archive">
+                <i class="fa-solid fa-box-archive"></i>
+              </button>
+              <button class="btn btn-sm btn-danger" onclick="deleteContact('${msg.id}')" title="Delete">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </td>
+          </tr>
         `;
       });
-      html += `</div>`;
+      
+      html += `
+            </tbody>
+          </table>
+        </div>
+        <div class="alert alert-info mb-0">
+          <i class="fa-solid fa-info-circle"></i>
+          <strong>Total Messages:</strong> ${contacts.length}
+        </div>
+      `;
       container.innerHTML = html;
+    }
+
+    function getStatusBadge(status) {
+      const badges = {
+        new: '<span class="badge bg-primary">New</span>',
+        'in-progress': '<span class="badge bg-warning text-dark">In Progress</span>',
+        read: '<span class="badge bg-info">Read</span>',
+        replied: '<span class="badge bg-success">Replied</span>',
+        archived: '<span class="badge bg-secondary">Archived</span>'
+      };
+      return badges[status] || badges.new;
+    }
+
+    function viewMessage(id) {
+      const contacts = getContacts();
+      const msg = contacts.find(c => c.id === id);
+      if (!msg) return;
+      
+      // Mark as read
+      msg.status = 'read';
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+      displayContacts();
+      
+      const modalHtml = `
+        <div class="modal fade show d-block" style="background: rgba(0,0,0,0.8);">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="background: #1a1a1a; color: #fff;">
+              <div class="modal-header" style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                <h5 class="modal-title">
+                  <i class="fa-solid fa-envelope-open"></i> Message from ${escapeHtml(msg.name)}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" onclick="closeModal()"></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3">
+                  <strong>Email:</strong> ${escapeHtml(msg.email)}<br>
+                  ${msg.phone ? `<strong>Phone:</strong> ${escapeHtml(msg.phone)}<br>` : ''}
+                  <strong>Subject:</strong> ${escapeHtml(msg.subject || 'No subject')}<br>
+                  <strong>Date:</strong> ${new Date(msg.date).toLocaleString()}<br>
+                  <strong>Priority:</strong> <span class="badge bg-${getPriorityColor(msg.priority)}">${msg.priority || 'normal'}</span>
+                </div>
+                <div class="card" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                  <div class="card-header"><strong>Message:</strong></div>
+                  <div class="card-body" style="white-space: pre-wrap;">${escapeHtml(msg.message)}</div>
+                </div>
+                ${msg.reply ? `
+                  <div class="card mt-3" style="background: rgba(40, 167, 69, 0.1); border: 1px solid rgba(40, 167, 69, 0.3);">
+                    <div class="card-header"><strong><i class="fa-solid fa-reply"></i> Your Reply:</strong></div>
+                    <div class="card-body" style="white-space: pre-wrap;">${escapeHtml(msg.reply)}</div>
+                  </div>
+                ` : ''}
+              </div>
+              <div class="modal-footer" style="border-top: 1px solid rgba(255,255,255,0.1);">
+                <button class="btn btn-success" onclick="closeModal(); replyToMessage('${msg.id}')">
+                  <i class="fa-solid fa-reply"></i> Reply
+                </button>
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      document.body.insertAdjacentHTML('beforeend', modalHtml);
+    }
+
+    function replyToMessage(id) {
+      const contacts = getContacts();
+      const msg = contacts.find(c => c.id === id);
+      if (!msg) return;
+      
+      const currentReply = msg.reply || '';
+      const modalHtml = `
+        <div class="modal fade show d-block" style="background: rgba(0,0,0,0.8);">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="background: #1a1a1a; color: #fff;">
+              <div class="modal-header" style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                <h5 class="modal-title">
+                  <i class="fa-solid fa-reply"></i> Reply to ${escapeHtml(msg.name)}
+                </h5>
+                <button type="button" class="btn-close btn-close-white" onclick="closeModal()"></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3">
+                  <strong>To:</strong> ${escapeHtml(msg.email)}<br>
+                  <strong>Subject:</strong> Re: ${escapeHtml(msg.subject || 'Your inquiry')}
+                </div>
+                <div class="card mb-3" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                  <div class="card-header"><strong>Original Message:</strong></div>
+                  <div class="card-body" style="white-space: pre-wrap; max-height: 150px; overflow-y: auto;">${escapeHtml(msg.message)}</div>
+                </div>
+                <label class="form-label"><strong>Your Reply:</strong></label>
+                <textarea id="replyText" class="form-control" rows="8" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2);" placeholder="Type your reply here...">${escapeHtml(currentReply)}</textarea>
+              </div>
+              <div class="modal-footer" style="border-top: 1px solid rgba(255,255,255,0.1);">
+                <button class="btn btn-success" onclick="saveReply('${msg.id}')">
+                  <i class="fa-solid fa-paper-plane"></i> Send Reply
+                </button>
+                <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      closeModal();
+      document.body.insertAdjacentHTML('beforeend', modalHtml);
+    }
+
+    function saveReply(id) {
+      const replyText = document.getElementById('replyText').value.trim();
+      if (!replyText) {
+        alert('Please enter a reply message');
+        return;
+      }
+      
+      const contacts = getContacts();
+      const msg = contacts.find(c => c.id === id);
+      if (!msg) return;
+      
+      msg.reply = replyText;
+      msg.replyAt = new Date().toISOString();
+      msg.status = 'replied';
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+      
+      closeModal();
+      displayContacts();
+      alert('Reply sent successfully!');
+    }
+
+    function getPriorityColor(priority) {
+      const colors = {
+        low: 'secondary',
+        normal: 'info',
+        high: 'warning',
+        urgent: 'danger'
+      };
+      return colors[priority] || 'info';
+    }
+
+    function closeModal() {
+      const modals = document.querySelectorAll('.modal');
+      modals.forEach(m => m.remove());
     }
 
     function deleteContact(id) {
@@ -321,6 +642,121 @@
       localStorage.setItem('contacts', JSON.stringify(contacts));
       displayContacts();
       alert('Message deleted');
+    }
+
+    function setContactStatus(id, status) {
+      const contacts = getContacts();
+      const msg = contacts.find(c => c.id === id);
+      if (!msg) return;
+      msg.status = status;
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+      displayContacts();
+    }
+
+    function composeNewReply() {
+      const contacts = getContacts();
+      if (!contacts.length) {
+        alert('Không có tin nhắn nào để phản hồi');
+        return;
+      }
+
+      const modalHtml = `
+        <div class="modal fade show d-block" style="background: rgba(0,0,0,0.8);">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="background: #1a1a1a; color: #fff;">
+              <div class="modal-header" style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                <h5 class="modal-title">
+                  <i class="fa-solid fa-pen-to-square"></i> Ghi phản hồi cho khách hàng
+                </h5>
+                <button type="button" class="btn-close btn-close-white" onclick="closeModal()"></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label class="form-label"><strong>Chọn tin nhắn:</strong></label>
+                  <select id="composeMessageSelect" class="form-control" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2);">
+                    <option value="">-- Chọn khách hàng --</option>
+                    ${contacts.map(msg => `
+                      <option value="${msg.id}">
+                        ${escapeHtml(msg.name)} (${escapeHtml(msg.email)}) - ${escapeHtml(msg.subject || 'No subject')}
+                      </option>
+                    `).join('')}
+                  </select>
+                </div>
+                <div id="composeMessagePreview" class="mb-3" style="display:none;">
+                  <div class="card" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">
+                    <div class="card-body">
+                      <div class="small text-white-50 mb-1"><strong>Tin nhắn gốc:</strong></div>
+                      <div id="composeOriginalMessage" style="white-space: pre-wrap; max-height: 120px; overflow-y: auto;"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label"><strong>Nội dung phản hồi:</strong></label>
+                  <textarea id="composeReplyText" class="form-control" rows="10" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2);" placeholder="Nhập nội dung phản hồi của bạn..."></textarea>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label"><strong>Đặt trạng thái:</strong></label>
+                  <select id="composeStatusSelect" class="form-control" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2);">
+                    <option value="replied">Replied</option>
+                    <option value="in-progress">In Progress</option>
+                    <option value="archived">Archived</option>
+                  </select>
+                </div>
+              </div>
+              <div class="modal-footer" style="border-top: 1px solid rgba(255,255,255,0.1);">
+                <button class="btn btn-success" onclick="sendComposedReply()">
+                  <i class="fa-solid fa-paper-plane"></i> Gửi phản hồi
+                </button>
+                <button class="btn btn-secondary" onclick="closeModal()">Hủy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+      // Setup message preview
+      document.getElementById('composeMessageSelect').addEventListener('change', (e) => {
+        const msgId = e.target.value;
+        if (!msgId) {
+          document.getElementById('composeMessagePreview').style.display = 'none';
+          return;
+        }
+        const msg = contacts.find(c => c.id === msgId);
+        if (msg) {
+          document.getElementById('composeOriginalMessage').textContent = msg.message;
+          document.getElementById('composeMessagePreview').style.display = 'block';
+        }
+      });
+    }
+
+    function sendComposedReply() {
+      const msgId = document.getElementById('composeMessageSelect').value;
+      const replyText = document.getElementById('composeReplyText').value.trim();
+      const status = document.getElementById('composeStatusSelect').value;
+
+      if (!msgId) {
+        alert('Vui lòng chọn tin nhắn');
+        return;
+      }
+      if (!replyText) {
+        alert('Vui lòng nhập nội dung phản hồi');
+        return;
+      }
+
+      const contacts = getContacts();
+      const msg = contacts.find(c => c.id === msgId);
+      if (!msg) return;
+
+      msg.reply = replyText;
+      msg.replyAt = new Date().toISOString();
+      msg.status = status;
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+
+      closeModal();
+      displayContacts();
+      alert('Phản hồi đã được gửi thành công!');
     }
 
     function refreshContacts() {
@@ -339,5 +775,13 @@
       displayContacts();
     });
   </script>
+  
+  <footer class="site-footer"><p>© 2025 • LuxAuto • All rights reserved</p></footer>
+  
+  <!-- Bootstrap JS -->
+  <script src="../bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Scripts -->
+  <script src="auth-effects.js"></script>
+  <script src="nav-lite.js"></script>
 </body>
 </html>

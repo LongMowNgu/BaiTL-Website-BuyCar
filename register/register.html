@@ -4,28 +4,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#0a0d14" />
-  <title>Register - AutoTrade</title>
+  <title>Register - LuxAuto</title>
   <!-- Bootstrap (local) -->
   <link href="../bootstrap-5.3.8-dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <!-- Shared site styles to match index theme -->
-  <link rel="stylesheet" href="../index/styles.css">
+  <!-- Shared styles -->
+  <link rel="stylesheet" href="../login/auth-shared.css">
+  <!-- Register page styles -->
   <link rel="stylesheet" href="register.css">
 </head>
 <body>
   <div class="page-bg"></div>
-  <header class="site-header">
-    <a class="brand" href="../index/index.html" aria-label="LuxAuto home">
-      <div class="logo-container">
-        <img src="../logo/logo9.png" alt="LuxAuto" class="brand-logo" />
+  
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: rgb(18, 18, 18); backdrop-filter: blur(10px);">
+    <div class="container d-flex align-items-center justify-content-center">
+      <a class="navbar-brand" href="../index/index.html" aria-label="LuxAuto home">
+        <img src="../logo/logo9.png" alt="LuxAuto" class="brand-logo" style="height:64px;" />
+      </a>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="../index/index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../contact/contact.html">Contact</a></li>
+          <li class="nav-item">
+            <div class="btn-group ms-lg-2" role="group">
+              <a href="../login/login.html" class="btn btn-auth-outline pill-btn-left">Login</a>
+              <a href="register.html" class="btn btn-auth-solid pill-btn-right">Register</a>
+            </div>
+          </li>
+        </ul>
       </div>
-    </a>
-  </header>
+    </div>
+  </nav>
 
   <main class="center-area">
-    <div class="card register-card p-4 shadow-lg">
-  <h2 class="text-center text-white mb-3">Create an Account</h2>
+    <div class="card register-card p-4">
+      <h2 class="title text-center">Create your LuxAuto account</h2>
+      <p class="subtitle text-center">Join us to buy and sell luxury cars</p>
       <form id="registerForm">
         <div class="mb-3">
           <label class="input-label"><i class="fa-solid fa-user"></i> Full Name</label>
@@ -66,8 +82,8 @@
         <p id="error-msg" class="text-danger text-center mb-2"></p>
         <p id="loading-msg" class="text-success text-center mb-2"></p>
 
-        <button type="submit" class="btn btn-register-submit w-100 rounded-pill mb-3">
-          <i class="fa-solid fa-user-plus"></i> Register
+        <button type="submit" class="btn btn-primary w-100 rounded-pill mb-3" id="registerBtn">
+          <i class="fa-solid fa-user-plus"></i> Create account
         </button>
         
         <div class="login-section text-center">
@@ -98,10 +114,8 @@
     </div>
   </div>
 
-  <footer class="site-footer"><p>© 2025 • AutoTrade • All rights reserved</p></footer>
+  <footer class="site-footer"><p>© 2025 • LuxAuto • All rights reserved</p></footer>
 
-  <script src="../login/auth.js"></script>
-  <script src="register.js"></script>
-  <script src="../login/auth-effects.js"></script>
+  <script src="register-complete.js"></script>
 </body>
 </html>

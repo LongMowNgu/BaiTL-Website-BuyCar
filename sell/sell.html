@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sell your car online - List your vehicle on AutoTrade">
+    <title>Sell Your Car - LuxAuto</title>
+    
+    <!-- Bootstrap 5 CSS (local) -->
+    <link href="../bootstrap-5.3.8-dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- Shared styles -->
+    <link rel="stylesheet" href="../login/auth-shared.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="sell.css">
+</head>
+<body class="page-fade-in">
+    <div class="page-bg"></div>
+    
+    <!-- Navigation Bar (Index Style) -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: rgb(18, 18, 18); backdrop-filter: blur(10px);">
+        <div class="container d-flex align-items-center">
+            <a class="navbar-brand mx-auto" href="../index/index.html" aria-label="LuxAuto home">
+                <img src="../logo/logo9.png" alt="LuxAuto" class="brand-logo" style="height:64px;" />
+            </a>
+            
+            <!-- Mobile Toggle Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <!-- Navigation Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index/index.html#landingAnimation">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index/index.html#buy-cars">Buy Cars</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="sell.html">Sell Cars</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index/index.html#featured">Featured Cars</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../contact/contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="btn-group ms-lg-2" role="group" id="authButtons">
+                            <a href="../login/login.html" class="btn btn-auth-outline pill-btn-left">Login</a>
+                            <a href="../register/register.html" class="btn btn-auth-solid pill-btn-right">Register</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Progress Steps Indicator -->
+        <div class="container">
+            <div class="progress-steps">
+                <div class="step active" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Vehicle Info</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Photos</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Contact</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" data-step="4">
+                    <div class="step-number">4</div>
+                    <div class="step-label">Review</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container py-5">
+            <div class="row">
+                <!-- Left Column - Form -->
+                <div class="col-lg-7">
+                    <div class="form-card">
+                        <!-- Header with Quick Stats -->
+                        <div class="form-header">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h2><i class="fa-solid fa-car-side"></i> Sell Your Car</h2>
+                                    <p class="text-muted mb-0">Fill in the details below to list your vehicle</p>
+                                </div>
+                                <div class="quick-stats">
+                                    <div class="stat-badge" id="estimatedTime">
+                                        <i class="fa-solid fa-clock"></i>
+                                        <span>~5 min</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Form Progress Indicator (Top) -->
+                        <div class="form-progress-top">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated" id="formProgressTop" role="progressbar" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <!-- Sell Car Form -->
+                        <form id="sellCarForm">
+                            <!-- Vehicle Information Section -->
+                            <div class="form-section">
+                                <h5 class="section-title">
+                                    <i class="fa-solid fa-circle-info"></i> Vehicle Information
+                                </h5>
+
+                                <!-- Car Title with Character Counter -->
+                                <div class="mb-3 form-field-animated">
+                                    <label for="carTitle" class="form-label">
+                                        Car Title <span class="text-danger">*</span>
+                                        <span class="field-hint" data-tooltip="Create an eye-catching title for your listing">
+                                            <i class="fa-solid fa-circle-question"></i>
+                                        </span>
+                                    </label>
+                                    <div class="input-wrapper">
+                                        <input type="text" class="form-control" id="carTitle" placeholder="e.g., Toyota Camry 2020" maxlength="100" required>
+                                        <span class="input-icon"><i class="fa-solid fa-pencil"></i></span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="form-text text-muted">Give your listing an attractive title</small>
+                                        <small class="char-counter" id="titleCounter">0/100</small>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <!-- Brand -->
+                                    <div class="col-md-6 mb-3">
+                                        <label for="brand" class="form-label">Brand <span class="text-danger">*</span></label>
+                                        <select class="form-select" id="brand" required>
+                                            <option value="">Select Brand</option>
+                                            <option value="Toyota">Toyota</option>
+                                            <option value="Honda">Honda</option>
+                                            <option value="Ford">Ford</option>
+                                            <option value="BMW">BMW</option>
+                                            <option value="Mercedes-Benz">Mercedes-Benz</option>
+                                            <option value="Audi">Audi</option>
+                                            <option value="Hyundai">Hyundai</option>
+                                            <option value="Kia">Kia</option>
+                                            <option value="Mazda">Mazda</option>
+                                            <option value="Nissan">Nissan</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Model -->
+                                    <div class="col-md-6 mb-3">
+                                        <label for="model" class="form-label">Model <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="model" placeholder="e.g., Camry" required>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <!-- Year -->
+                                    <div class="col-md-6 mb-3">
+                                        <label for="year" class="form-label">Year <span class="text-danger">*</span></label>
+                                        <select class="form-select" id="year" required>
+                                            <option value="">Select Year</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Mileage -->
+                                    <div class="col-md-6 mb-3">
+                                        <label for="mileage" class="form-label">Mileage (km) <span class="text-danger">*</span></label>
+                                        <input type="number" class="form-control" id="mileage" placeholder="e.g., 50000" required>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <!-- Condition -->
+                                    <div class="col-md-6 mb-3">
+                                        <label for="condition" class="form-label">Condition <span class="text-danger">*</span></label>
+                                        <select class="form-select" id="condition" required>
+                                            <option value="">Select Condition</option>
+                                            <option value="Excellent">Excellent</option>
+                                            <option value="Good">Good</option>
+                                            <option value="Fair">Fair</option>
+                                            <option value="Poor">Poor</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Transmission -->
+                                    <div class="col-md-6 mb-3">
+                                        <label for="transmission" class="form-label">Transmission <span class="text-danger">*</span></label>
+                                        <select class="form-select" id="transmission" required>
+                                            <option value="">Select Type</option>
+                                            <option value="Automatic">Automatic</option>
+                                            <option value="Manual">Manual</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <!-- Fuel Type -->
+                                    <div class="col-md-6 mb-3">
+                                        <label for="fuelType" class="form-label">Fuel Type <span class="text-danger">*</span></label>
+                                        <select class="form-select" id="fuelType" required>
+                                            <option value="">Select Fuel Type</option>
+                                            <option value="Petrol">Petrol</option>
+                                            <option value="Diesel">Diesel</option>
+                                            <option value="Electric">Electric</option>
+                                            <option value="Hybrid">Hybrid</option>
+                                        </select>
+                                    </div>
+
+                            <!-- Color -->
+                            <div class="col-md-6 mb-3">
+                                <label for="color" class="form-label">Color <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="color" placeholder="e.g., Silver" required>
+                            </div>
+                        </div>
+
+                        <!-- VIN / Plate field -->
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="vinPlate" class="form-label">
+                                    VIN / Plate Number (optional) 
+                                    <span class="field-hint" data-tooltip="Vehicle Identification Number or License Plate">
+                                        <i class="fa-solid fa-circle-question"></i>
+                                    </span>
+                                </label>
+                                <input type="text" class="form-control" id="vinPlate" placeholder="e.g., 1HGBH41JXMN109186 or 30A-12345">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Car Reservation Checker Section -->
+                    <div class="form-section" style="border-top: 2px solid rgba(13,110,253,0.35);">
+                        <h5 class="section-title">
+                            <i class="fa-solid fa-search-plus"></i> Kiểm tra trạng thái đặt xe
+                        </h5>
+                        <p class="text-white-50 mb-3">Nhập VIN hoặc biển số để kiểm tra nếu có ai đã đặt mua xe này trước đó</p>
+                        <div class="row mb-2">
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="reservationCheck" placeholder="VIN hoặc biển số để tra cứu...">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-outline-primary w-100" id="checkReservationBtn">
+                                    <i class="fa-solid fa-search"></i> Tra cứu
+                                </button>
+                            </div>
+                        </div>
+                        <div id="reservationResult"></div>
+                    </div>
+                            <!-- Pricing Section -->
+                            <div class="form-section">
+                                <h5 class="section-title">
+                                    <i class="fa-solid fa-tag"></i> Pricing
+                                </h5>
+
+                                <!-- Price -->
+                                <div class="mb-3 form-field-animated">
+                                    <label for="price" class="form-label">
+                                        Price (VND) <span class="text-danger">*</span>
+                                        <span class="field-hint" data-tooltip="Set a competitive price to attract buyers">
+                                            <i class="fa-solid fa-circle-question"></i>
+                                        </span>
+                                    </label>
+                                    <div class="input-wrapper price-input-wrapper">
+                                        <input type="number" class="form-control price-input" id="price" placeholder="e.g., 500000000" required>
+                                        <span class="input-currency">VND</span>
+                                    </div>
+                                    <small class="form-text text-muted">Enter the price in Vietnamese Dong</small>
+                                    <!-- Price Comparison -->
+                                    <div class="price-comparison mt-2" id="priceComparison" style="display: none;">
+                                        <div class="comparison-badge above-market">
+                                            <i class="fa-solid fa-arrow-up"></i> Above market average
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Negotiable -->
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="negotiable">
+                                        <label class="form-check-label" for="negotiable">
+                                            Price is negotiable
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Description Section -->
+                            <div class="form-section">
+                                <h5 class="section-title">
+                                    <i class="fa-solid fa-align-left"></i> Description
+                                </h5>
+
+                                <!-- Description with Character Counter -->
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Vehicle Description <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" id="description" rows="5" placeholder="Describe your car's features, condition, and any additional information..." maxlength="1000" required></textarea>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="form-text text-muted">Provide detailed information to attract buyers</small>
+                                        <small class="char-counter" id="descCounter">0/1000</small>
+                                    </div>
+                                </div>
+                                
+                                <!-- AI Description Helper -->
+                                <div class="mb-3">
+                                    <button type="button" class="btn btn-outline-primary btn-sm" id="aiSuggestionBtn">
+                                        <i class="fa-solid fa-wand-magic-sparkles"></i> Get AI Description Suggestions
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Images Section -->
+                            <div class="form-section">
+                                <h5 class="section-title">
+                                    <i class="fa-solid fa-images"></i> Photos
+                                </h5>
+
+                                <!-- Image Upload with Drag & Drop -->
+                                <div class="mb-3">
+                                    <label for="carImages" class="form-label">Upload Images <span class="text-danger">*</span></label>
+                                    
+                                    <!-- Drag and Drop Zone -->
+                                    <div class="drag-drop-zone" id="dragDropZone">
+                                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                                        <p><strong>Drag & Drop</strong> images here</p>
+                                        <p>or</p>
+                                        <button type="button" class="btn btn-primary btn-sm" id="browseBtn">Browse Files</button>
+                                        <input type="file" class="d-none" id="carImages" accept="image/*" multiple required>
+                                    </div>
+                                    
+                                    <div class="d-flex justify-content-between align-items-center mt-2">
+                                        <small class="form-text text-muted">Upload up to 10 high-quality images (JPG, PNG, WebP)</small>
+                                        <small class="image-counter" id="imageCounter">0/10 images</small>
+                                    </div>
+                                </div>
+
+                                <!-- Image Upload Tips -->
+                                <div class="alert alert-info alert-sm mb-3">
+                                    <i class="fa-solid fa-lightbulb"></i> <strong>Pro Tips:</strong>
+                                    <ul class="mb-0 mt-2">
+                                        <li>Take photos in good lighting</li>
+                                        <li>Include exterior, interior, and engine photos</li>
+                                        <li>Show any damage or wear honestly</li>
+                                    </ul>
+                                </div>
+
+                                <!-- Image Preview with Reorder -->
+                                <div id="imagePreview" class="image-preview-container"></div>
+                            </div>
+
+                            <!-- Contact Information Section -->
+                            <div class="form-section">
+                                <h5 class="section-title">
+                                    <i class="fa-solid fa-address-book"></i> Contact Information
+                                </h5>
+
+                                <div class="row">
+                                    <!-- Full Name -->
+                                    <div class="col-md-6 mb-3">
+                                        <label for="sellerName" class="form-label">Full Name <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="sellerName" placeholder="Your name" required>
+                                    </div>
+
+                                    <!-- Phone -->
+                                    <div class="col-md-6 mb-3">
+                                        <label for="sellerPhone" class="form-label">Phone Number <span class="text-danger">*</span></label>
+                                        <input type="tel" class="form-control" id="sellerPhone" placeholder="e.g., 0901234567" required>
+                                    </div>
+                                </div>
+
+                                <!-- Email -->
+                                <div class="mb-3">
+                                    <label for="sellerEmail" class="form-label">Email <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" id="sellerEmail" placeholder="your.email@example.com" required>
+                                </div>
+
+                                <!-- Location -->
+                                <div class="mb-3">
+                                    <label for="location" class="form-label">Location <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="location" placeholder="City, Province" required>
+                                </div>
+                            </div>
+
+                            <!-- Terms and Conditions -->
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="terms" required>
+                                    <label class="form-check-label" for="terms">
+                                        I agree to the <a href="#" class="text-primary">Terms and Conditions</a> <span class="text-danger">*</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Save Draft Button -->
+                            <div class="d-flex gap-3 mb-3">
+                                <button type="button" class="btn btn-outline-secondary flex-fill" id="saveDraftBtn">
+                                    <i class="fa-solid fa-floppy-disk"></i> Save Draft
+                                </button>
+                                <button type="button" class="btn btn-outline-danger flex-fill" id="clearFormBtn">
+                                    <i class="fa-solid fa-trash"></i> Clear Form
+                                </button>
+                            </div>
+
+                            <!-- Submit Button with Progress -->
+                            <button type="submit" class="btn btn-primary btn-lg w-100" id="submitBtn">
+                                <i class="fa-solid fa-paper-plane"></i> List My Car
+                            </button>
+                            
+                            <!-- Form Progress Indicator -->
+                            <div class="form-progress mt-3">
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated" id="formProgress" role="progressbar" style="width: 0%"></div>
+                                </div>
+                                <small class="text-muted d-block text-center mt-2">Form Completion: <span id="progressText">0%</span></small>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Right Column - Preview -->
+                <div class="col-lg-5">
+                    <div class="preview-card sticky-top">
+                        <!-- Preview Tabs -->
+                        <ul class="nav nav-pills preview-tabs mb-3" role="tablist">
+                            <li class="nav-item flex-fill" role="presentation">
+                                <button class="nav-link active w-100" id="desktop-tab" data-bs-toggle="pill" data-bs-target="#desktop" type="button" role="tab">
+                                    <i class="fa-solid fa-desktop"></i> Desktop
+                                </button>
+                            </li>
+                            <li class="nav-item flex-fill" role="presentation">
+                                <button class="nav-link w-100" id="mobile-tab" data-bs-toggle="pill" data-bs-target="#mobile" type="button" role="tab">
+                                    <i class="fa-solid fa-mobile-screen"></i> Mobile
+                                </button>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <!-- Desktop Preview -->
+                            <div class="tab-pane fade show active" id="desktop" role="tabpanel">
+                                <h5 class="preview-header">
+                                    <i class="fa-solid fa-eye"></i> Preview
+                                </h5>
+                                <p class="text-muted small">See how your listing will appear to buyers</p>
+
+                                <!-- Preview Content -->
+                                <div id="carPreview" class="car-preview">
+                            <div class="preview-image">
+                                <i class="fa-solid fa-image"></i>
+                                <p>Upload images to see preview</p>
+                            </div>
+                            <div class="preview-details">
+                                <h4 id="previewTitle" class="preview-car-title">Your Car Title</h4>
+                                <div class="preview-price">
+                                    <span id="previewPrice">Price not set</span>
+                                    <span id="previewNegotiable" class="badge bg-success" style="display: none;">Negotiable</span>
+                                </div>
+                                <div class="preview-specs">
+                                    <div class="spec-item">
+                                        <i class="fa-solid fa-calendar"></i>
+                                        <span id="previewYear">-</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fa-solid fa-gauge"></i>
+                                        <span id="previewMileage">-</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fa-solid fa-gears"></i>
+                                        <span id="previewTransmission">-</span>
+                                    </div>
+                                    <div class="spec-item">
+                                        <i class="fa-solid fa-gas-pump"></i>
+                                        <span id="previewFuel">-</span>
+                                    </div>
+                                </div>
+                                <div class="preview-description">
+                                    <p id="previewDesc">Description will appear here...</p>
+                                </div>
+                                <div class="preview-contact">
+                                    <div class="contact-item">
+                                        <i class="fa-solid fa-user"></i>
+                                        <span id="previewName">Seller Name</span>
+                                    </div>
+                                    <div class="contact-item">
+                                        <i class="fa-solid fa-phone"></i>
+                                        <span id="previewPhone">Phone</span>
+                                    </div>
+                                    <div class="contact-item">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span id="previewLocation">Location</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mobile Preview -->
+                        <div class="tab-pane fade" id="mobile" role="tabpanel">
+                            <div class="mobile-preview-wrapper">
+                                <div class="mobile-frame">
+                                    <div class="mobile-notch"></div>
+                                    <div class="mobile-content" id="mobilePreview">
+                                        <!-- Mobile preview content will be cloned here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Listing Statistics -->
+                    <div class="stats-card mt-3">
+                        <h6 class="mb-3"><i class="fa-solid fa-chart-simple"></i> Listing Stats</h6>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <div class="stat-box">
+                                    <div class="stat-value" id="viewsCount">0</div>
+                                    <div class="stat-label">Expected Views</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="stat-box">
+                                    <div class="stat-value" id="interestCount">0</div>
+                                    <div class="stat-label">Est. Interest</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pricing Suggestion -->
+                    <div class="pricing-card mt-3">
+                        <h6 class="mb-2"><i class="fa-solid fa-calculator"></i> Market Price</h6>
+                        <div class="market-price-range">
+                            <p class="mb-1 text-muted small">Suggested price range based on your inputs:</p>
+                            <div class="price-range" id="priceRange">
+                                <span class="min-price">-</span>
+                                <span class="separator">to</span>
+                                <span class="max-price">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="overlay-content">
+            <div class="spinner-border text-light mb-3" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="text-white">Processing your listing...</p>
+        </div>
+    </div>
+
+    <!-- Success Overlay -->
+    <div id="successOverlay" class="success-overlay hidden">
+        <div class="overlay-content">
+            <div class="success-animation">
+                <div class="success-checkmark">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <div class="success-confetti">
+                    <div class="confetti"></div>
+                    <div class="confetti"></div>
+                    <div class="confetti"></div>
+                    <div class="confetti"></div>
+                    <div class="confetti"></div>
+                    <div class="confetti"></div>
+                </div>
+            </div>
+            <h3 class="text-white mt-3">Success!</h3>
+            <p class="text-white">Your car has been listed successfully</p>
+            <div class="success-stats mt-3">
+                <div class="stat-item">
+                    <i class="fa-solid fa-hashtag"></i>
+                    <span>Listing ID: #<span id="listingId"></span></span>
+                </div>
+                <div class="stat-item mt-2">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Your listing is now live!</span>
+                </div>
+                <div class="stat-item mt-2">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Reaching <span id="potentialBuyers"></span>+ potential buyers</span>
+                </div>
+            </div>
+            <button class="btn btn-light mt-4" id="viewListingBtn">
+                <i class="fa-solid fa-eye"></i> View Listing
+            </button>
+        </div>
+    </div>
+
+    <!-- Quick Help Floating Button -->
+    <button class="floating-help-btn" id="floatingHelpBtn" title="Need Help?">
+        <i class="fa-solid fa-question"></i>
+    </button>
+
+    <!-- Help Modal -->
+    <div class="modal fade" id="helpModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fa-solid fa-circle-info"></i> How to Create a Great Listing
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="help-section">
+                        <h6><i class="fa-solid fa-camera"></i> Photos</h6>
+                        <ul>
+                            <li>Use high-quality, well-lit images</li>
+                            <li>Include exterior from all angles</li>
+                            <li>Show interior and dashboard</li>
+                            <li>Take photos of engine bay</li>
+                            <li>Document any damage honestly</li>
+                        </ul>
+                    </div>
+                    <div class="help-section">
+                        <h6><i class="fa-solid fa-tag"></i> Pricing</h6>
+                        <ul>
+                            <li>Research similar vehicles</li>
+                            <li>Be realistic about condition</li>
+                            <li>Consider market demand</li>
+                            <li>Price slightly negotiable</li>
+                        </ul>
+                    </div>
+                    <div class="help-section">
+                        <h6><i class="fa-solid fa-file-lines"></i> Description</h6>
+                        <ul>
+                            <li>Be honest and detailed</li>
+                            <li>Mention service history</li>
+                            <li>List all features</li>
+                            <li>Note any modifications</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Got it!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Tooltip for Form Help -->
+    <div id="formTooltip" class="form-tooltip hidden">
+        <div class="tooltip-content"></div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle (local) -->
+    <script src="../bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Navigation Script -->
+    <script src="../login/nav-lite.js"></script>
+    
+    <!-- Auth check and user display -->
+    <script>
+        // Display user info if logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const authButtons = document.getElementById('authButtons');
+            
+            if (currentUser && authButtons) {
+                authButtons.innerHTML = `
+                    <span class="navbar-text text-white me-3">
+                        <i class="fa-solid fa-user"></i> ${currentUser.fullname || currentUser.email}
+                    </span>
+                    <button onclick="handleLogout()" class="btn btn-outline-light btn-sm">
+                        <i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </button>
+                `;
+            }
+        });
+        
+        function handleLogout() {
+            if (confirm('Bạn có chắc muốn đăng xuất?')) {
+                localStorage.removeItem('currentUser');
+                window.location.href = '../login/login.html';
+            }
+        }
+    </script>
+    
+    <!-- Custom JavaScript -->
+    <script src="sell.js"></script>
+</body>
+</html>

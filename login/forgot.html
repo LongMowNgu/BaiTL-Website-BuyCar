@@ -3,29 +3,44 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Forgot Password - AutoTrade</title>
+  <title>Forgot Password - LuxAuto</title>
   <!-- Bootstrap (local) -->
   <link href="../bootstrap-5.3.8-dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Abel&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <!-- Shared site styles to match index theme -->
-  <link rel="stylesheet" href="../index/styles.css" />
-  <link rel="stylesheet" href="login.css" />
+  <!-- Shared styles -->
+  <link rel="stylesheet" href="auth-shared.css" />
+  <!-- Forgot page styles -->
+  <link rel="stylesheet" href="forgot.css" />
   <meta name="theme-color" content="#0a0d14" />
 </head>
 <body>
   <div class="page-bg"></div>
-  <header class="site-header">
-    <a class="brand" href="../index/index.html" aria-label="LuxAuto home">
-      <div class="logo-container">
-        <img src="../logo/logo9.png" alt="LuxAuto" class="brand-logo" />
+  <!-- Navbar (index-like) -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-hidden" id="mainNav" style="background-color: rgb(18, 18, 18); backdrop-filter: blur(10px);">
+    <div class="container d-flex align-items-center justify-content-center">
+      <a class="navbar-brand" href="../index/index.html" aria-label="LuxAuto home">
+        <img src="../logo/logo9.png" alt="LuxAuto" class="brand-logo" style="height:64px;" />
+      </a>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="../index/index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../contact/contact.html">Contact</a></li>
+          <li class="nav-item">
+            <div class="btn-group ms-lg-2" role="group">
+              <a href="../login/login.html" class="btn btn-auth-outline pill-btn-left">Login</a>
+              <a href="../register/register.html" class="btn btn-auth-solid pill-btn-right">Register</a>
+            </div>
+          </li>
+        </ul>
       </div>
-    </a>
-  </header>
+    </div>
+  </nav>
+
   <main class="center-area">
-    <div class="card">
-      <h1 class="title">Forgot Password</h1>
-      <p class="subtitle">Enter your email to receive reset instructions</p>
+    <div class="card register-card p-4 shadow-lg">
+      <h1 class="title">Forgot your password?</h1>
+      <p class="subtitle">Enter your email and we'll send reset instructions</p>
 
       <div id="alert" class="alert hidden" role="status"></div>
 
@@ -47,7 +62,7 @@
         <div class="register-section">
           <p class="register-text">Remembered your password?</p>
           <a href="login.html" class="btn btn-register">
-            <i class="fa-solid fa-right-to-bracket"></i> Back to login
+            <i class="fa-solid fa-right-to-bracket"></i> Back to sign in
           </a>
         </div>
       </form>
@@ -72,10 +87,8 @@
     </div>
   </div>
 
-  <footer class="site-footer"><p>© 2025 • AutoTrade • All rights reserved</p></footer>
+  <footer class="site-footer"><p>© 2025 • LuxAuto • All rights reserved</p></footer>
 
-  <script src="auth.js"></script>
-  <script src="forgot.js"></script>
-  <script src="auth-effects.js"></script>
+  <script src="forgot-complete.js"></script>
 </body>
 </html>

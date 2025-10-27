@@ -10,15 +10,15 @@
 
     // gentle float animation (pure CSS would also work; this keeps JS control available)
     if (bg) {
-      bg.animate([
-        { transform: 'translateY(0px) scale(1)' },
-        { transform: 'translateY(-8px) scale(1.01)' },
-        { transform: 'translateY(0px) scale(1)' }
-      ], {
-        duration: 14000,
-        iterations: Infinity,
-        easing: 'ease-in-out'
-      });
+      // subtle slow scale + translate to make register background visible as well
+      bg.animate(
+        [
+          { transform: 'translate3d(0,0,0) scale(1)' },
+          { transform: 'translate3d(-2%, 1%, 0) scale(1.02)' },
+          { transform: 'translate3d(0,0,0) scale(1)' }
+        ],
+        { duration: 14000, iterations: Infinity, easing: 'ease-in-out' }
+      );
     }
 
     // mouse-based parallax

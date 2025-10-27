@@ -1,6 +1,6 @@
 // Register page script
-// Purpose: Client-side validation for required fields, email format, and password match; simulate async submit.
-// Mục đích: Kiểm tra thông tin nhập, định dạng email, khớp mật khẩu; mô phỏng gửi bất đồng bộ.
+// Purpose: Client-side validation for required fields, email format, and password match; save to localStorage
+// Note: auth.js must be loaded before this script
 
 const form = document.getElementById('registerForm');
 const fullname = document.getElementById('fullname');
@@ -19,7 +19,6 @@ const loadingOverlay = document.getElementById('loadingOverlay');
 const successOverlay = document.getElementById('successOverlay');
 
 // Toggle password visibility for both password fields
-// Hiện/ẩn mật khẩu
 if (togglePassword) {
   togglePassword.addEventListener('click', () => {
     const type = password.type === 'password' ? 'text' : 'password';
@@ -41,7 +40,6 @@ if (toggleConfirmPassword) {
 }
 
 // Email validation with visual feedback
-// Kiểm tra email với biểu tượng trực quan
 function validateEmail(value) {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return regex.test(value);
@@ -61,7 +59,6 @@ email.addEventListener('input', () => {
 });
 
 // Password strength indicator
-// Chỉ báo độ mạnh mật khẩu
 function checkPasswordStrength(pass) {
   if (pass.length === 0) return null;
   if (pass.length < 6) return 'weak';
@@ -97,13 +94,13 @@ password.addEventListener('input', () => {
   strengthBar.className = `strength-bar-fill ${strength}`;
   
   if (strength === 'weak') {
-    strengthText.textContent = 'Yếu - Nên dài hơn và phức tạp hơn';
+    strengthText.textContent = 'Weak - Should be longer and more complex';
     strengthText.className = 'strength-text weak';
   } else if (strength === 'medium') {
-    strengthText.textContent = 'Trung bình - Khá tốt!';
+    strengthText.textContent = 'Medium - Pretty good!';
     strengthText.className = 'strength-text medium';
   } else {
-    strengthText.textContent = 'Mạnh - Mật khẩu an toàn!';
+    strengthText.textContent = 'Strong - Secure password!';
     strengthText.className = 'strength-text strong';
   }
 });
@@ -113,32 +110,56 @@ form.addEventListener('submit', (e) => {
   errorMsg.textContent = "";
   loadingMsg.textContent = "";
 
-  // ✅ Kiểm tra nhập đủ
+  // ✅ Check all fields are filled
   if (!fullname.value.trim() || !email.value.trim() || !password.value.trim() || !confirmPassword.value.trim()) {
-    errorMsg.textContent = "❌ Vui lòng nhập đầy đủ thông tin!";
+    errorMsg.textContent = "❌ Please fill in all fields!";
     const card = document.querySelector('.register-card');
     if (card) { card.classList.remove('shake'); void card.offsetWidth; card.classList.add('shake'); }
     return;
   }
 
-  // ✅ Kiểm tra định dạng email
+  // ✅ Check email format
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!regex.test(email.value)) {
-    errorMsg.textContent = "❌ Email không hợp lệ!";
+    errorMsg.textContent = "❌ Invalid email!";
     const card = document.querySelector('.register-card');
     if (card) { card.classList.remove('shake'); void card.offsetWidth; card.classList.add('shake'); }
     return;
   }
 
-  // ✅ Kiểm tra mật khẩu trùng khớp
+  // ✅ Check passwords match
   if (password.value !== confirmPassword.value) {
-    errorMsg.textContent = "❌ Mật khẩu không khớp!";
+    errorMsg.textContent = "❌ Passwords do not match!";
     const card = document.querySelector('.register-card');
     if (card) { card.classList.remove('shake'); void card.offsetWidth; card.classList.add('shake'); }
     return;
   }
 
-  // ⏳ Hiển thị loading overlay
+  // ✅ Check minimum password length
+  if (password.value.length < 6) {
+    errorMsg.textContent = "❌ Password must be at least 6 characters!";
+    const card = document.querySelector('.register-card');
+    if (card) { card.classList.remove('shake'); void card.offsetWidth; card.classList.add('shake'); }
+    return;
+  }
+
+  // ✅ Register user using auth.js functions
+  // Trim password to avoid accidental leading/trailing spaces being stored
+  const registerResult = registerUser(fullname.value.trim(), email.value.trim(), password.value.trim());
+  
+  if (!registerResult.success) {
+    // Show detailed error message
+    if (registerResult.message.includes('already registered')) {
+      errorMsg.innerHTML = "❌ <strong>Email already registered!</strong><br>This email is already in use. Please <a href='../login/login.html' style='color: #fff; text-decoration: underline;'>login</a> or use a different email.";
+    } else {
+      errorMsg.textContent = "❌ " + registerResult.message;
+    }
+    const card = document.querySelector('.register-card');
+    if (card) { card.classList.remove('shake'); void card.offsetWidth; card.classList.add('shake'); }
+    return;
+  }
+
+  // ⏳ Show loading overlay
   loadingOverlay.classList.remove('hidden');
   
   setTimeout(() => {

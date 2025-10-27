@@ -1,6 +1,5 @@
 // Forgot password page script
 // Purpose: Validate email and simulate sending reset instructions.
-// Mục đích: Kiểm tra email và mô phỏng gửi hướng dẫn đặt lại mật khẩu.
 
 const form    = document.getElementById('forgotForm');
 const emailEl = document.getElementById('email');
@@ -44,8 +43,8 @@ emailEl.addEventListener('input', () => {
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   const eVal = emailEl.value.trim().toLowerCase();
-  if (!eVal) { showAlert('Vui lòng nhập email!', 'error'); shake(); return; }
-  if (!isValidEmail(eVal)) { showAlert('Email không đúng định dạng!', 'error'); shake(); return; }
+  if (!eVal) { showAlert('Please enter your email!', 'error'); shake(); return; }
+  if (!isValidEmail(eVal)) { showAlert('Invalid email format!', 'error'); shake(); return; }
 
   // Show loading overlay
   loadingOverlay.classList.remove('hidden');
@@ -63,7 +62,7 @@ form.addEventListener('submit', (e) => {
     // Hide success after delay
     setTimeout(() => {
       successOverlay.classList.add('hidden');
-      showAlert('✅ Hướng dẫn đặt lại mật khẩu đã được gửi!', 'success');
+      showAlert('✅ Password reset instructions sent!', 'success');
     }, 1200);
   }, 800);
 });

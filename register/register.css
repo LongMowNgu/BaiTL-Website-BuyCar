@@ -1,53 +1,44 @@
-/* Full replacement: harmonized register styles */
+/* ===================================================
+   Register Page - Enhanced Styles with Visual Effects
+   =================================================== */
 
+/* Base reset */
 * { box-sizing: border-box; }
 html, body { height: 100%; }
-body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: var(--light-color, #eef); background: inherit; }
+body { 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+  color: var(--light-color, #eef); 
+  background: inherit;
+  animation: pageEnter 1s ease-out;
+}
 
-/* Fallback dark background in case shared index/styles.css isn't loaded */
+/* Page entrance animation */
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Fallback dark background */
 body {
   background: radial-gradient(1200px 700px at 10% 10%, rgba(13,71,161,0.14), transparent 40%),
               radial-gradient(1000px 600px at 90% 0%, rgba(11,58,133,0.16), transparent 45%),
               linear-gradient(180deg, #0a0d14 0%, #070a10 100%);
 }
 
-.page-bg { position: fixed; inset:0; z-index:0; pointer-events:none; }
-.center-area { width:100%; max-width:560px; padding:36px 22px 44px; margin:0 auto; z-index:2; }
-
-.register-card { background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.95); border-radius:16px; padding:22px; box-shadow: 0 12px 40px rgba(0,0,0,0.55); }
-.register-card h2 { color:#fff; margin-bottom:10px; }
-
-.input-label { display:block; font-size:13px; color: rgba(255,255,255,0.85); margin-bottom:8px; display:flex; gap:8px; align-items:center; }
-.form-control { border-radius:10px; padding:12px 14px; border:1px solid rgba(255,255,255,0.95); background: rgba(255,255,255,0.02); color:#fff; }
-.form-control:focus { box-shadow: 0 0 0 6px rgba(11,94,215,0.06); border-color: rgba(11,94,215,0.6); }
-
-.password-wrapper { position: relative; }
-.toggle-password { position:absolute; right:8px; top:50%; transform:translateY(-50%); background:transparent; border:none; color:#cfcfcf; }
-
-.btn-register-submit { width:100%; padding:12px 16px; border-radius:10px; background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.95); color:#fff; }
-.btn-back-login { width:100%; padding:10px 12px; border-radius:10px; }
-
-.register-card.revealed { animation: cardIn 520ms cubic-bezier(.2,.8,.2,1) forwards; }
-@keyframes cardIn { from { opacity:0; transform: translateY(12px) scale(.995); } to { opacity:1; transform: translateY(0) scale(1); } }
-
-.hidden { display:none !important; }
-
-/* Header / brand styles for register page */
-.site-header {
-  width: 100%;
-  padding: 10px 22px 6px;
-  position: relative;
-  z-index: 3;
-  display: block;
-  text-align: center;
-}
-.brand { display:inline-block; vertical-align: middle; text-decoration:none; }
-.logo-container { display:inline-block; vertical-align: middle; }
-.logo-text { display:none; }
-.brand img, .brand-logo { height: 72px; display:block; margin:0 auto; border-radius:6px; }
-
-/* Animated background matching login for register page */
-.page-bg {
+/* Animated background matching login */
+.page-bg { 
+  position: fixed; 
+  inset:0; 
+  z-index:0; 
+  pointer-events:none;
   background: radial-gradient(600px 400px at 10% 20%, rgba(11,52,100,0.12), transparent 30%),
               radial-gradient(500px 300px at 90% 80%, rgba(11,94,215,0.08), transparent 35%),
               linear-gradient(180deg, #07101a 0%, #071017 100%);
@@ -61,13 +52,235 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-@media (max-width: 720px) {
-  .brand-logo { height: 56px; }
-  .center-area { padding-top: 8px; }
-  .site-header { margin-bottom: 6px; }
+/* Center area container */
+.center-area { 
+  width:100%; 
+  max-width:560px; 
+  padding:36px 22px 44px; 
+  margin:0 auto; 
+  z-index:2; 
 }
 
-/* subtle header sheen to blend with background */
+/* Register card with entrance animation */
+.register-card { 
+  background: rgba(255,255,255,0.03); 
+  border:1px solid rgba(255,255,255,0.95); 
+  border-radius:16px; 
+  padding:22px; 
+  box-shadow: 0 12px 40px rgba(0,0,0,0.55);
+  animation: cardSlideUp 0.8s ease-out 0.2s both;
+  transition: all 0.3s ease;
+}
+
+.register-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 60px rgba(13, 110, 253, 0.4);
+}
+
+@keyframes cardSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.register-card.revealed { 
+  animation: cardIn 520ms cubic-bezier(.2,.8,.2,1) forwards; 
+}
+
+@keyframes cardIn { 
+  from { 
+    opacity:0; 
+    transform: translateY(12px) scale(.995); 
+  } 
+  to { 
+    opacity:1; 
+    transform: translateY(0) scale(1); 
+  } 
+}
+
+/* Card headers */
+.register-card h2 { 
+  color:#fff; 
+  margin-bottom:10px;
+  animation: fadeInUp 0.6s ease-out 0.3s both;
+}
+
+/* Input labels with hover effect */
+.input-label { 
+  display:block; 
+  font-size:13px; 
+  color: rgba(255,255,255,0.85); 
+  margin-bottom:8px; 
+  display:flex; 
+  gap:8px; 
+  align-items:center;
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.6s ease-out 0.4s both;
+}
+
+.input-label:hover {
+  color: #fff;
+  transform: translateX(3px);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Form controls with enhanced focus effects */
+.form-control { 
+  border-radius:10px; 
+  padding:12px 14px; 
+  border:1px solid #fff; 
+  background: rgba(255,255,255,0.02); 
+  color:#fff; 
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6), 0 0 0 4px rgba(255,255,255,0.02) inset;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Input focus glow effect with white background */
+.form-control:focus { 
+  background: #fff !important;
+  color: #0a0a0a !important;
+  border-color: #fff !important;
+  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25), 
+              0 0 20px rgba(255, 255, 255, 0.4),
+              0 5px 20px rgba(13, 110, 253, 0.3);
+  transform: translateY(-3px) scale(1.01);
+}
+
+.form-control:focus::placeholder {
+  color: #999 !important;
+}
+
+/* Password wrapper */
+.password-wrapper { 
+  position: relative; 
+}
+
+.toggle-password { 
+  position:absolute; 
+  right:8px; 
+  top:50%; 
+  transform:translateY(-50%); 
+  background:transparent; 
+  border:none; 
+  color:#cfcfcf;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.toggle-password:hover {
+  color: #fff;
+  transform: translateY(-50%) scale(1.2);
+}
+
+/* Button with ripple effect */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-primary:hover::after {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(13, 110, 253, 0.5),
+              0 0 30px rgba(13, 110, 253, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+.btn-register-submit { 
+  width:100%; 
+  padding:12px 16px; 
+  border-radius:10px; 
+  background: linear-gradient(180deg,#0b5ed7,#0660b0); 
+  border:1px solid #fff; 
+  color:#fff; 
+  box-shadow: 0 8px 30px rgba(11,94,215,0.25);
+}
+
+.btn-back-login { 
+  width:100%; 
+  padding:10px 12px; 
+  border-radius:10px;
+  transition: all 0.3s ease;
+}
+
+.btn-back-login:hover {
+  transform: translateX(5px);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Header / brand styles */
+.site-header {
+  width: 100%;
+  padding: 10px 22px 6px;
+  position: relative;
+  z-index: 3;
+  display: block;
+  text-align: center;
+}
+
+.brand { 
+  display:inline-block; 
+  vertical-align: middle; 
+  text-decoration:none; 
+}
+
+.logo-container { 
+  display:inline-block; 
+  vertical-align: middle; 
+  transition: transform 0.3s ease;
+}
+
+.logo-container:hover {
+  transform: scale(1.05);
+}
+
+.logo-text { display:none; }
+
+.brand img, .brand-logo { 
+  height: 72px; 
+  display:block; 
+  margin:0 auto; 
+  border-radius:6px;
+  filter: drop-shadow(0 5px 15px rgba(13, 110, 253, 0.3));
+}
+
+/* Subtle header sheen */
 .site-header::after {
   content: '';
   position: absolute;
@@ -78,17 +291,27 @@ body {
   mix-blend-mode: overlay;
 }
 
-/* Make sure card doesn't overflow and is centered */
-.card, .register-card { box-sizing: border-box; overflow: hidden; margin: 0 auto; }
+/* Card overflow fix */
+.card, .register-card { 
+  box-sizing: border-box; 
+  overflow: hidden; 
+  margin: 0 auto; 
+}
 
-/* Ensure helper texts are visible */
+/* Helper texts */
 .login-text, .register-text {
   color: var(--text-muted, rgba(255,255,255,0.9));
   text-align: center;
   margin-bottom: 8px;
+  transition: all 0.3s ease;
 }
 
-/* Make the register CTA clearer when shown as link */
+.login-text:hover, .register-text:hover {
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Register CTA link */
 .btn-register {
   display: inline-block;
   background: rgba(255,255,255,0.03);
@@ -98,6 +321,43 @@ body {
   border-radius: 28px;
   text-decoration: none;
   font-weight:600;
+  transition: all 0.3s ease;
+}
+
+.btn-register:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(13, 110, 253, 0.3);
+}
+
+/* Utility classes */
+.hidden { display:none !important; }
+
+/* Responsive adjustments */
+@media (max-width: 720px) {
+  .brand-logo { height: 56px; }
+  .center-area { padding-top: 8px; }
+  .site-header { margin-bottom: 6px; }
+  
+  .register-card:hover {
+    transform: translateY(-3px);
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-2px) scale(1.01);
+  }
+}
+
+/* Accessibility: Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Button icon tweaks (Font Awesome) */
