@@ -979,19 +979,42 @@ function loadDraft() {
 
 // Clear form button
 clearFormBtn.addEventListener('click', () => {
-    const confirmed = confirm('Are you sure you want to clear all form data? This action cannot be undone.');
+    // Show confirmation toast first
+    showToast('warning', 'Confirm Clear', 'Click again to confirm clearing all form data', 3000);
     
-    if (confirmed) {
-    resetForm();
-    showToast('info', 'Form Cleared', 'All fields have been reset', 2500);
+    // Change button to confirm mode
+    clearFormBtn.innerHTML = '<i class="fa-solid fa-exclamation-triangle"></i> Click Again to Confirm';
+    clearFormBtn.style.background = 'rgba(255, 193, 7, 0.2)';
+    
+    // Set one-time confirm handler
+    const confirmClear = () => {
+        resetForm();
+        showToast('success', 'Form Cleared', 'All fields have been reset successfully', 3000);
         localStorage.removeItem('carListingDraft');
         
         // Show feedback
         clearFormBtn.innerHTML = '<i class="fa-solid fa-check"></i> Cleared!';
+        clearFormBtn.style.background = 'rgba(40, 167, 69, 0.2)';
+        
         setTimeout(() => {
             clearFormBtn.innerHTML = '<i class="fa-solid fa-trash"></i> Clear Form';
+            clearFormBtn.style.background = 'rgba(220, 53, 69, 0.1)';
         }, 2000);
-    }
+        
+        clearFormBtn.removeEventListener('click', confirmClear);
+    };
+    
+    // Add confirm handler (one-time)
+    clearFormBtn.addEventListener('click', confirmClear, { once: true });
+    
+    // Auto-reset after 5 seconds if not confirmed
+    setTimeout(() => {
+        if (clearFormBtn.innerHTML.includes('Confirm')) {
+            clearFormBtn.innerHTML = '<i class="fa-solid fa-trash"></i> Clear Form';
+            clearFormBtn.style.background = 'rgba(220, 53, 69, 0.1)';
+            clearFormBtn.removeEventListener('click', confirmClear);
+        }
+    }, 5000);
 });
 
 // ===================================
@@ -1058,6 +1081,9 @@ sellCarForm.addEventListener('submit', async (e) => {
     console.log('Car Listing Data:', formData);
     console.log('Uploaded Images:', uploadedImages);
     
+    // Show submitting toast
+    showToast('info', 'Submitting Listing', 'Please wait while we process your car listing...', 2000);
+    
     // Show loading overlay
     loadingOverlay.classList.remove('hidden');
     
@@ -1066,9 +1092,11 @@ sellCarForm.addEventListener('submit', async (e) => {
         // Hide loading overlay
         loadingOverlay.classList.add('hidden');
         
-    // Show success overlay
+        // Show success overlay
         successOverlay.classList.remove('hidden');
-    showToast('success', 'Listing Submitted', 'Your car listing has been submitted successfully!', 4000);
+        
+        // Show success toast with listing ID
+        showToast('success', 'Listing Published! 🎉', `Your car has been listed successfully! Listing ID: #${generatedListingId}`, 5000);
         
         // Clear draft from localStorage
         localStorage.removeItem('carListingDraft');
