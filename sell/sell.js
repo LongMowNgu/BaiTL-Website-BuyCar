@@ -333,7 +333,18 @@ colorInput.addEventListener('input', () => {
 
 // Update email preview
 sellerEmailInput.addEventListener('input', () => {
+    updateFormProgress();
     checkStepCompletion();
+});
+
+// Update location preview
+locationInput.addEventListener('input', () => {
+    updateFormProgress();
+});
+
+// Update seller phone preview  
+sellerPhoneInput.addEventListener('input', () => {
+    updateFormProgress();
 });
 
 // ===================================
@@ -864,7 +875,56 @@ document.getElementById('mobile-tab').addEventListener('shown.bs.tab', updateMob
 // Save Draft Functionality
 // ===================================
 
+let isDraftMode = false;
+
 saveDraftBtn.addEventListener('click', () => {
+    // If in draft mode, load the draft
+    if (isDraftMode) {
+        const draft = localStorage.getItem('carListingDraft');
+        if (draft) {
+            const data = JSON.parse(draft);
+            
+            carTitleInput.value = data.title || '';
+            brandInput.value = data.brand || '';
+            modelInput.value = data.model || '';
+            yearInput.value = data.year || '';
+            mileageInput.value = data.mileage || '';
+            conditionInput.value = data.condition || '';
+            transmissionInput.value = data.transmission || '';
+            fuelTypeInput.value = data.fuelType || '';
+            colorInput.value = data.color || '';
+            priceInput.value = data.price || '';
+            negotiableInput.checked = data.negotiable || false;
+            descriptionInput.value = data.description || '';
+            sellerNameInput.value = data.sellerName || '';
+            sellerPhoneInput.value = data.sellerPhone || '';
+            sellerEmailInput.value = data.sellerEmail || '';
+            locationInput.value = data.location || '';
+            
+            // Trigger input events to update previews
+            carTitleInput.dispatchEvent(new Event('input'));
+            priceInput.dispatchEvent(new Event('input'));
+            descriptionInput.dispatchEvent(new Event('input'));
+            sellerNameInput.dispatchEvent(new Event('input'));
+            sellerPhoneInput.dispatchEvent(new Event('input'));
+            locationInput.dispatchEvent(new Event('input'));
+            yearInput.dispatchEvent(new Event('change'));
+            mileageInput.dispatchEvent(new Event('input'));
+            transmissionInput.dispatchEvent(new Event('change'));
+            fuelTypeInput.dispatchEvent(new Event('change'));
+            
+            showToast('success', 'Draft Restored', 'Your previous draft has been loaded successfully', 3000);
+            
+            // Reset button to save mode
+            saveDraftBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Save Draft';
+            saveDraftBtn.classList.remove('btn-info');
+            saveDraftBtn.classList.add('btn-outline-secondary');
+            isDraftMode = false;
+        }
+        return;
+    }
+    
+    // Otherwise, save the draft
     const draftData = {
         title: carTitleInput.value,
         brand: brandInput.value,
@@ -906,60 +966,14 @@ function loadDraft() {
     const draft = localStorage.getItem('carListingDraft');
     
     if (draft) {
-        // Show toast notification instead of alert
+        // Show single toast notification
         showToast('info', 'Draft Available', 'You have a saved draft. Click "Load Draft" button to restore it.', 5000);
         
-        // Add visual indicator on save draft button
-        const saveDraftBtn = document.getElementById('saveDraftBtn');
-        if (saveDraftBtn) {
-            saveDraftBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-down"></i> Load Draft';
-            saveDraftBtn.classList.add('btn-info');
-            saveDraftBtn.classList.remove('btn-outline-secondary');
-            
-            // Change behavior to load draft on first click
-            saveDraftBtn.addEventListener('click', function loadHandler() {
-                const data = JSON.parse(draft);
-                
-                carTitleInput.value = data.title || '';
-                brandInput.value = data.brand || '';
-                modelInput.value = data.model || '';
-                yearInput.value = data.year || '';
-                mileageInput.value = data.mileage || '';
-                conditionInput.value = data.condition || '';
-                transmissionInput.value = data.transmission || '';
-                fuelTypeInput.value = data.fuelType || '';
-                colorInput.value = data.color || '';
-                priceInput.value = data.price || '';
-                negotiableInput.checked = data.negotiable || false;
-                descriptionInput.value = data.description || '';
-                sellerNameInput.value = data.sellerName || '';
-                sellerPhoneInput.value = data.sellerPhone || '';
-                sellerEmailInput.value = data.sellerEmail || '';
-                locationInput.value = data.location || '';
-                
-                // Trigger input events to update previews
-                carTitleInput.dispatchEvent(new Event('input'));
-                priceInput.dispatchEvent(new Event('input'));
-                descriptionInput.dispatchEvent(new Event('input'));
-                sellerNameInput.dispatchEvent(new Event('input'));
-                sellerPhoneInput.dispatchEvent(new Event('input'));
-                locationInput.dispatchEvent(new Event('input'));
-                yearInput.dispatchEvent(new Event('change'));
-                mileageInput.dispatchEvent(new Event('input'));
-                transmissionInput.dispatchEvent(new Event('change'));
-                fuelTypeInput.dispatchEvent(new Event('change'));
-                
-                showToast('success', 'Draft Restored', 'Your previous draft has been loaded successfully', 3000);
-                
-                // Reset button to normal save draft behavior
-                saveDraftBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Save Draft';
-                saveDraftBtn.classList.remove('btn-info');
-                saveDraftBtn.classList.add('btn-outline-secondary');
-                
-                // Remove this event listener
-                saveDraftBtn.removeEventListener('click', loadHandler);
-            }, { once: true });
-        }
+        // Change button to load draft mode
+        saveDraftBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-down"></i> Load Draft';
+        saveDraftBtn.classList.add('btn-info');
+        saveDraftBtn.classList.remove('btn-outline-secondary');
+        isDraftMode = true;
     }
 }
 

@@ -670,6 +670,8 @@ small.text-muted {
     transition: all 0.3s ease;
     color: #ffffff !important;
     font-weight: 500;
+    position: relative;
+    z-index: 1;
 }
 
 .form-control::placeholder {
@@ -683,6 +685,7 @@ small.text-muted {
     box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25), 0 0 20px rgba(13, 110, 253, 0.3);
     outline: 0;
     color: #ffffff !important;
+    z-index: 999;
 }
 
 .form-control:hover,

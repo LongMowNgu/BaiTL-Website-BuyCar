@@ -1102,44 +1102,6 @@
     }
   }, 1000);
 
-  // Enhanced copy button with multiple formats
-  document.querySelectorAll('.copy-btn').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      const card = this.closest('.interactive-card');
-      const textToCopy = card.dataset.copy;
-      
-      // Copy to clipboard with multiple formats
-      if (navigator.clipboard && navigator.clipboard.write) {
-        const textBlob = new Blob([textToCopy], { type: 'text/plain' });
-        const htmlBlob = new Blob([`<a href="mailto:${textToCopy}">${textToCopy}</a>`], { type: 'text/html' });
-        
-        navigator.clipboard.write([
-          new ClipboardItem({
-            'text/plain': textBlob,
-            'text/html': htmlBlob
-          })
-        ]).then(() => {
-          const icon = this.querySelector('i');
-          const originalClass = icon.className;
-          icon.className = 'fa-solid fa-check';
-          this.classList.add('copied');
-          showToast('success', 'Copied!', `"${textToCopy}" copied to clipboard`, 2000);
-          
-          setTimeout(() => {
-            icon.className = originalClass;
-            this.classList.remove('copied');
-          }, 2000);
-        });
-      } else {
-        // Fallback
-        navigator.clipboard.writeText(textToCopy).then(() => {
-          showToast('success', 'Copied!', `"${textToCopy}" copied to clipboard`, 2000);
-        });
-      }
-    });
-  });
-
   // Initialize all enhanced features
   createParticles();
   initStatsDashboard();
