@@ -522,14 +522,14 @@ h3.text-white {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     border-radius: 10px;
-    color: #ffffff;
+    color: #ffffff !important;
     font-size: 0.95rem;
     transition: var(--transition-smooth);
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
 .form-control::placeholder {
-    color: rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.6) !important;
 }
 
 .form-control:focus {
@@ -537,6 +537,7 @@ h3.text-white {
     background: rgba(255,255,255,0.08);
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.2), 0 8px 24px rgba(0,0,0,0.4);
+    color: #ffffff !important;
 }
 
 .form-control.is-valid {

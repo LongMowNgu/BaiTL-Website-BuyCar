@@ -668,12 +668,12 @@ small.text-muted {
     border-radius: 8px;
     padding: 0.75rem;
     transition: all 0.3s ease;
-    color: #ffffff;
+    color: #ffffff !important;
     font-weight: 500;
 }
 
 .form-control::placeholder {
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.6) !important;
 }
 
 .form-control:focus,
@@ -682,7 +682,7 @@ small.text-muted {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25), 0 0 20px rgba(13, 110, 253, 0.3);
     outline: 0;
-    color: #ffffff;
+    color: #ffffff !important;
 }
 
 .form-control:hover,
@@ -775,11 +775,13 @@ textarea.form-control {
 
 .drag-drop-zone p {
     margin: 0.5rem 0;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
 }
 
 .drag-drop-zone strong {
-    color: var(--dark-color);
+    color: #ffffff;
+    font-weight: 600;
 }
 
 /* ===================================
