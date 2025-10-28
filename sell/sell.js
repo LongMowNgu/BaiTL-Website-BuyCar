@@ -200,9 +200,9 @@ function populateYearDropdown() {
 function formatPrice(price) {
     if (!price) return 'Price not set';
     
-    // Format number with commas and add VND currency
-    const formattedPrice = parseInt(price).toLocaleString('vi-VN');
-    return `${formattedPrice} VND`;
+    // Format number with commas and add USD currency
+    const formattedPrice = parseInt(price).toLocaleString('en-US');
+    return `$${formattedPrice}`;
 }
 
 // ===================================
@@ -640,6 +640,7 @@ function updateFormProgress() {
 
 function updatePriceSuggestion() {
     const brand = brandInput.value;
+    const model = modelInput.value;
     const year = parseInt(yearInput.value);
     const mileage = parseInt(mileageInput.value);
     const condition = conditionInput.value;
@@ -650,31 +651,53 @@ function updatePriceSuggestion() {
         return;
     }
     
-    // Simple price calculation based on depreciation and mileage
+    // Enhanced price calculation based on brand, year, and condition
     const currentYear = new Date().getFullYear();
     const age = currentYear - year;
-    const basePrice = 500000000; // 500 million VND base
     
-    // Depreciation: 10% per year
-    let estimatedPrice = basePrice * Math.pow(0.9, age);
+    // Base prices by brand category (in USD)
+    const brandBasePrices = {
+        // Luxury brands
+        'Mercedes-Benz': 80000, 'BMW': 75000, 'Audi': 70000, 
+        'Lexus': 65000, 'Porsche': 120000, 'Jaguar': 70000,
+        'Land Rover': 75000, 'Cadillac': 65000, 'Infiniti': 55000,
+        'Acura': 50000, 'Volvo': 55000, 'Genesis': 50000,
+        // Premium brands
+        'Toyota': 35000, 'Honda': 32000, 'Mazda': 30000,
+        'Subaru': 33000, 'Nissan': 30000, 'Hyundai': 28000,
+        'Kia': 27000, 'Ford': 35000, 'Chevrolet': 33000,
+        'Volkswagen': 32000, 'Jeep': 38000, 'Ram': 40000,
+        // Economy brands
+        'Mitsubishi': 25000, 'Suzuki': 22000, 'Daihatsu': 18000,
+        'Perodua': 15000, 'Proton': 17000
+    };
     
-    // Mileage factor: -5% for every 10,000 km
-    const mileageFactor = 1 - (mileage / 10000) * 0.05;
-    estimatedPrice *= Math.max(mileageFactor, 0.5); // Minimum 50% value
+    // Get base price or use default
+    let basePrice = brandBasePrices[brand] || 30000;
+    
+    // Apply depreciation (luxury cars retain value better)
+    const isLuxury = basePrice > 60000;
+    const depreciationRate = isLuxury ? 0.88 : 0.85; // Luxury: 12%/year, Others: 15%/year
+    let estimatedPrice = basePrice * Math.pow(depreciationRate, Math.min(age, 15));
+    
+    // Mileage factor: -2% for every 10,000 km (more realistic)
+    const mileageImpact = Math.max(0, 1 - (mileage / 10000) * 0.02);
+    estimatedPrice *= Math.max(mileageImpact, 0.3); // Minimum 30% value
     
     // Condition adjustment
     const conditionMultipliers = {
-        'Excellent': 1.1,
+        'Excellent': 1.15,
         'Good': 1.0,
-        'Fair': 0.85,
-        'Poor': 0.7
+        'Fair': 0.82,
+        'Poor': 0.65
     };
     
     estimatedPrice *= conditionMultipliers[condition] || 1.0;
     
-    // Calculate range (±15%)
-    const minPrice = Math.round(estimatedPrice * 0.85);
-    const maxPrice = Math.round(estimatedPrice * 1.15);
+    // Calculate range (±18% for more realistic market variation)
+    const minPrice = Math.round(estimatedPrice * 0.82);
+    const maxPrice = Math.round(estimatedPrice * 1.18);
+    const avgPrice = Math.round(estimatedPrice);
     
     priceRange.innerHTML = `
         <span class="min-price">${formatPrice(minPrice)}</span>
@@ -683,10 +706,10 @@ function updatePriceSuggestion() {
     `;
     
     // Store for price comparison
-    window.marketPriceRange = { min: minPrice, max: maxPrice, avg: estimatedPrice };
+    window.marketPriceRange = { min: minPrice, max: maxPrice, avg: avgPrice };
 }
 
-// Check price comparison
+// Check price comparison with corrected logic
 function checkPriceComparison() {
     const price = parseInt(priceInput.value);
     
@@ -700,21 +723,31 @@ function checkPriceComparison() {
     priceComparison.style.display = 'block';
     
     if (price > max) {
+        // Calculate percentage ABOVE the max price
+        const percentAbove = Math.round(((price - max) / max) * 100);
         priceComparison.innerHTML = `
             <div class="comparison-badge above-market">
-                <i class="fa-solid fa-arrow-up"></i> Above market average by ${Math.round(((price - avg) / avg) * 100)}%
+                <i class="fa-solid fa-arrow-up"></i> ${percentAbove}% above market range
             </div>
         `;
     } else if (price < min) {
+        // Calculate percentage BELOW the min price
+        const percentBelow = Math.round(((min - price) / min) * 100);
         priceComparison.innerHTML = `
             <div class="comparison-badge below-market">
-                <i class="fa-solid fa-arrow-down"></i> Below market average by ${Math.round(((avg - price) / avg) * 100)}%
+                <i class="fa-solid fa-arrow-down"></i> ${percentBelow}% below market range
             </div>
         `;
     } else {
+        // Calculate position within range
+        const positionPercent = Math.round(((price - min) / (max - min)) * 100);
+        let pricePosition = 'fair';
+        if (positionPercent < 35) pricePosition = 'competitive';
+        else if (positionPercent > 65) pricePosition = 'premium';
+        
         priceComparison.innerHTML = `
             <div class="comparison-badge fair-price">
-                <i class="fa-solid fa-check-circle"></i> Fair price - within market range
+                <i class="fa-solid fa-check-circle"></i> Within market range (${positionPercent}th percentile)
             </div>
         `;
     }
