@@ -2,6 +2,58 @@
 // Purpose: Client-side validation for required fields, email format, and password match; save to localStorage
 // Note: auth.js must be loaded before this script
 
+// ===================================
+// Toast Notification System
+// ===================================
+function createToastContainer() {
+  if (!document.querySelector('.toast-container')) {
+    const container = document.createElement('div');
+    container.className = 'toast-container';
+    document.body.appendChild(container);
+  }
+}
+
+function showToast(type, title, message, duration = 5000) {
+  createToastContainer();
+  const container = document.querySelector('.toast-container');
+  
+  const icons = {
+    success: 'fa-circle-check',
+    error: 'fa-circle-xmark',
+    warning: 'fa-triangle-exclamation',
+    info: 'fa-circle-info'
+  };
+  
+  const toast = document.createElement('div');
+  toast.className = `toast-notification toast-${type}`;
+  toast.innerHTML = `
+    <div class="toast-icon">
+      <i class="fa-solid ${icons[type]}"></i>
+    </div>
+    <div class="toast-content">
+      <div class="toast-title">${title}</div>
+      <div class="toast-message">${message}</div>
+    </div>
+    <button class="toast-close" aria-label="Close">
+      <i class="fa-solid fa-times"></i>
+    </button>
+    <div class="toast-progress"></div>
+  `;
+  
+  container.appendChild(toast);
+  
+  const closeBtn = toast.querySelector('.toast-close');
+  closeBtn.addEventListener('click', () => {
+    toast.classList.add('toast-hiding');
+    setTimeout(() => toast.remove(), 300);
+  });
+  
+  setTimeout(() => {
+    toast.classList.add('toast-hiding');
+    setTimeout(() => toast.remove(), 300);
+  }, duration);
+}
+
 const form = document.getElementById('registerForm');
 const fullname = document.getElementById('fullname');
 const email = document.getElementById('email');

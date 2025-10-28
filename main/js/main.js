@@ -951,5 +951,123 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Removed click-outside-to-close behavior
     // Filters now only close when the filter toggle button is clicked again
+
+    // ===================================
+    // Featured Cars Filter Functionality
+    // ===================================
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const carItems = document.querySelectorAll('.car-item');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            const filterValue = this.getAttribute('data-filter');
+            
+            // Filter car items
+            carItems.forEach((item, index) => {
+                const category = item.getAttribute('data-category');
+                
+                if (filterValue === 'all' || category === filterValue) {
+                    item.style.display = 'block';
+                    item.style.animation = 'none';
+                    setTimeout(() => {
+                        item.style.animation = `fadeInUp 0.6s ease forwards`;
+                        item.style.animationDelay = `${index * 0.1}s`;
+                    }, 10);
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+    
+    // ===================================
+    // Wishlist & Quick View Functionality
+    // ===================================
+    const overlayBtns = document.querySelectorAll('.overlay-btn');
+    
+    overlayBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const icon = this.querySelector('i');
+            
+            if (icon.classList.contains('bi-heart')) {
+                // Toggle wishlist
+                if (icon.classList.contains('bi-heart-fill')) {
+                    icon.classList.remove('bi-heart-fill');
+                    icon.classList.add('bi-heart');
+                    showNotification('Removed from wishlist', 'info');
+                } else {
+                    icon.classList.remove('bi-heart');
+                    icon.classList.add('bi-heart-fill');
+                    showNotification('Added to wishlist!', 'success');
+                    this.style.animation = 'pulse 0.3s ease';
+                }
+            } else if (icon.classList.contains('bi-eye')) {
+                // Quick view
+                showNotification('Quick view feature coming soon!', 'info');
+            } else if (icon.classList.contains('bi-arrow-left-right')) {
+                // Compare
+                showNotification('Added to compare list!', 'success');
+            }
+        });
+    });
+    
+    // Simple notification system
+    function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.textContent = message;
+        notification.style.cssText = `
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: ${type === 'success' ? '#20c997' : '#0dcaf0'};
+            color: #fff;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            z-index: 10000;
+            font-weight: 500;
+            animation: slideInRight 0.3s ease, fadeOut 0.3s ease 2.7s;
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
+    
+    // Add CSS animations for notification
+    if (!document.getElementById('notificationStyles')) {
+        const style = document.createElement('style');
+        style.id = 'notificationStyles';
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(400px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            @keyframes fadeOut {
+                to {
+                    opacity: 0;
+                    transform: translateX(400px);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
 });
+
 

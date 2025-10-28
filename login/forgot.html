@@ -6,28 +6,48 @@
   <title>Forgot Password - LuxAuto</title>
   <!-- Bootstrap (local) -->
   <link href="../bootstrap-5.3.8-dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <!-- Bootstrap Icons (local) -->
+  <link rel="stylesheet" href="../bootstrap-5.3.8-dist/font/bootstrap-icons.css">
+  <!-- Font Awesome (local) -->
+  <link rel="stylesheet" href="../bootstrap-5.3.8-dist/fontawesome/css/all.min.css">
   <!-- Shared styles -->
   <link rel="stylesheet" href="auth-shared.css" />
+  <!-- Index nav styles to keep nav consistent -->
+  <link rel="stylesheet" href="../main/css/styles.css" />
   <!-- Forgot page styles -->
   <link rel="stylesheet" href="forgot.css" />
   <meta name="theme-color" content="#0a0d14" />
 </head>
 <body>
   <div class="page-bg"></div>
-  <!-- Navbar (index-like) -->
+  
+  <!-- Unified Navbar (from Sell - simplified for auth pages) -->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-hidden" id="mainNav" style="background-color: rgb(18, 18, 18); backdrop-filter: blur(10px);">
-    <div class="container d-flex align-items-center justify-content-center">
-      <a class="navbar-brand" href="../index/index.html" aria-label="LuxAuto home">
-        <img src="../logo/logo9.png" alt="LuxAuto" class="brand-logo" style="height:64px;" />
-      </a>
+    <div class="container d-flex align-items-center">
+      <div class="navbar-left-group d-flex align-items-center me-auto">
+        <!-- Brand Logo -->
+        <a class="navbar-brand" href="../main/index.html" aria-label="LuxAuto home">
+          <img src="../logo/logo9.png" alt="LuxAuto" class="brand-logo" style="height: 50px; transition: transform 0.3s ease;">
+        </a>
+      </div>
+
+      <!-- Mobile Toggle Button -->
+      <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <!-- Navigation Links -->
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="../index/index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="../contact/contact.html">Contact</a></li>
           <li class="nav-item">
-            <div class="btn-group ms-lg-2" role="group">
+            <a class="nav-link" href="../main/index.html#landingAnimation">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../contact/contact.html">Contact</a>
+          </li>
+          <li class="nav-item">
+            <!-- Authentication buttons use monochrome styling -->
+            <div class="btn-group ms-lg-2" role="group" id="authButtons">
               <a href="../login/login.html" class="btn btn-auth-outline pill-btn-left">Login</a>
               <a href="../register/register.html" class="btn btn-auth-solid pill-btn-right">Register</a>
             </div>
@@ -89,6 +109,19 @@
 
   <footer class="site-footer"><p>© 2025 • LuxAuto • All rights reserved</p></footer>
 
+  <!-- Bootstrap JS -->
+  <script src="../bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Shared nav behavior for non-index pages -->
+  <script src="../main/nav-core.js"></script>
+  <!-- Show navbar immediately on auth pages -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const navbar = document.getElementById('mainNav');
+      if (navbar && navbar.classList.contains('navbar-hidden')) {
+        navbar.classList.remove('navbar-hidden');
+      }
+    });
+  </script>
   <script src="forgot-complete.js"></script>
 </body>
 </html>

@@ -6,10 +6,14 @@
   <title>Account Management - LuxAuto</title>
   <!-- Bootstrap (local) -->
   <link href="../bootstrap-5.3.8-dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons (for unified nav) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <!-- Shared styles -->
   <link rel="stylesheet" href="auth-shared.css">
+  <!-- Index nav styles to keep nav consistent -->
+  <link rel="stylesheet" href="../main/css/styles.css" />
   <style>
       /* Page entrance animation */
       body {
@@ -130,25 +134,31 @@
 <body>
   <div class="page-bg"></div>
   
-  <!-- Navigation Bar -->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: rgb(18, 18, 18); backdrop-filter: blur(10px);">
+  <!-- Unified Navbar (from index) -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-hidden" id="mainNav" style="background-color: rgb(18, 18, 18); backdrop-filter: blur(10px);">
     <div class="container d-flex align-items-center">
-      <div class="navbar-left-group d-flex align-items-center me-auto">
-        <button id="landingMenuBtn" class="landing-menu-btn nav-menu-trigger" type="button">
-          <i class="fa fa-bars"></i> MENU
-        </button>
-      </div>
-      <a class="navbar-brand mx-auto" href="../index/index.html" aria-label="LuxAuto home">
-        <img src="../logo/logo9.png" alt="LuxAuto" class="brand-logo" style="height:46px;" />
+      <a class="navbar-brand me-auto" href="../index/index.html" aria-label="LuxAuto home">
+        <img src="../logo/logo9.png" alt="LuxAuto" class="brand-logo" style="height:64px;" />
       </a>
+
+      <!-- Mobile Toggle Button -->
+      <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Chuyển đổi điều hướng">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <!-- Navigation Links -->
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="../index/index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="../contact/contact.html">Contact</a></li>
           <li class="nav-item">
-            <div class="btn-group ms-lg-2" role="group">
-              <a href="login.html" class="btn btn-auth-outline pill-btn-left">Login</a>
-              <a href="../register/register.html" class="btn btn-auth-solid pill-btn-right">Register</a>
+            <a class="nav-link nav-current-page" href="../main/index.html#landingAnimation" data-page="index.html">Trang chủ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../contact/contact.html">Liên hệ</a>
+          </li>
+          <li class="nav-item">
+            <div class="btn-group ms-lg-2" role="group" id="authButtons">
+              <a href="../login/login.html" class="btn btn-auth-outline pill-btn-left">Đăng nhập</a>
+              <a href="../register/register.html" class="btn btn-auth-solid pill-btn-right">Đăng ký</a>
             </div>
           </li>
         </ul>
@@ -780,8 +790,7 @@
   
   <!-- Bootstrap JS -->
   <script src="../bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Scripts -->
-  <script src="auth-effects.js"></script>
-  <script src="nav-lite.js"></script>
+  <!-- Shared nav behavior for non-index pages -->
+  <script src="../main/nav-core.js"></script>
 </body>
 </html>

@@ -8,27 +8,35 @@
     
     <!-- Bootstrap 5 CSS (local) -->
     <link href="../bootstrap-5.3.8-dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons (local) -->
+    <link rel="stylesheet" href="../bootstrap-5.3.8-dist/font/bootstrap-icons.css">
     
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Font Awesome Icons (local) -->
+    <link rel="stylesheet" href="../bootstrap-5.3.8-dist/fontawesome/css/all.min.css">
     
     <!-- Shared styles -->
     <link rel="stylesheet" href="../login/auth-shared.css">
+    <!-- Index nav styles to keep nav consistent -->
+    <link rel="stylesheet" href="../main/css/styles.css" />
+    <!-- Custom select styles -->
+    <link rel="stylesheet" href="../main/css/select-enhance.css" />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="sell.css">
 </head>
 <body class="page-fade-in">
-    <div class="page-bg"></div>
     
-    <!-- Navigation Bar (Index Style) -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: rgb(18, 18, 18); backdrop-filter: blur(10px);">
+    <!-- Unified Navbar (from index) -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-hidden" id="mainNav" style="background-color: rgb(18, 18, 18); backdrop-filter: blur(10px);">
         <div class="container d-flex align-items-center">
-            <a class="navbar-brand mx-auto" href="../index/index.html" aria-label="LuxAuto home">
-                <img src="../logo/logo9.png" alt="LuxAuto" class="brand-logo" style="height:64px;" />
-            </a>
-            
+            <div class="navbar-left-group d-flex align-items-center me-auto">
+                <!-- Brand Logo -->
+                <a class="navbar-brand" href="../main/index.html" aria-label="LuxAuto home">
+                    <img src="../logo/logo9.png" alt="LuxAuto" class="brand-logo" style="height: 50px; transition: transform 0.3s ease;">
+                </a>
+            </div>
+
             <!-- Mobile Toggle Button -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             
@@ -36,21 +44,22 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="../index/index.html#landingAnimation">Home</a>
+                        <a class="nav-link" href="../main/index.html#landingAnimation">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../index/index.html#buy-cars">Buy Cars</a>
+                        <a class="nav-link" href="../main/index.html#buy-cars">Buy Cars</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="sell.html">Sell Cars</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../index/index.html#featured">Featured Cars</a>
+                        <a class="nav-link" href="../main/index.html#featured">Featured Cars</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../contact/contact.html">Contact</a>
                     </li>
                     <li class="nav-item">
+                        <!-- Authentication buttons use monochrome styling -->
                         <div class="btn-group ms-lg-2" role="group" id="authButtons">
                             <a href="../login/login.html" class="btn btn-auth-outline pill-btn-left">Login</a>
                             <a href="../register/register.html" class="btn btn-auth-solid pill-btn-right">Register</a>
@@ -62,28 +71,40 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="main-container">
-        <!-- Progress Steps Indicator -->
+    <section class="main-container section-transition section-visible">
+        <!-- Enhanced Progress Header -->
         <div class="container">
-            <div class="progress-steps">
-                <div class="step active" data-step="1">
-                    <div class="step-number">1</div>
-                    <div class="step-label">Vehicle Info</div>
-                </div>
-                <div class="step-line"></div>
-                <div class="step" data-step="2">
-                    <div class="step-number">2</div>
-                    <div class="step-label">Photos</div>
-                </div>
-                <div class="step-line"></div>
-                <div class="step" data-step="3">
-                    <div class="step-number">3</div>
-                    <div class="step-label">Contact</div>
-                </div>
-                <div class="step-line"></div>
-                <div class="step" data-step="4">
-                    <div class="step-number">4</div>
-                    <div class="step-label">Review</div>
+            <div class="sell-progress-header">
+                <div class="progress-indicator">
+                    <div class="progress-bar-track">
+                        <div class="progress-bar-fill" id="overallProgress" style="width: 25%;"></div>
+                    </div>
+                    <div class="progress-steps-modern">
+                        <div class="step-item active" data-step="1">
+                            <div class="step-circle">
+                                <i class="fa-solid fa-car"></i>
+                            </div>
+                            <span class="step-text">Thông tin xe</span>
+                        </div>
+                        <div class="step-item" data-step="2">
+                            <div class="step-circle">
+                                <i class="fa-solid fa-images"></i>
+                            </div>
+                            <span class="step-text">Hình ảnh</span>
+                        </div>
+                        <div class="step-item" data-step="3">
+                            <div class="step-circle">
+                                <i class="fa-solid fa-address-book"></i>
+                            </div>
+                            <span class="step-text">Liên hệ</span>
+                        </div>
+                        <div class="step-item" data-step="4">
+                            <div class="step-circle">
+                                <i class="fa-solid fa-check-circle"></i>
+                            </div>
+                            <span class="step-text">Xem lại</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -146,18 +167,33 @@
                                     <!-- Brand -->
                                     <div class="col-md-6 mb-3">
                                         <label for="brand" class="form-label">Brand <span class="text-danger">*</span></label>
-                                        <select class="form-select" id="brand" required>
+                                        <select class="form-select filter-enhance" id="brand" required>
                                             <option value="">Select Brand</option>
                                             <option value="Toyota">Toyota</option>
                                             <option value="Honda">Honda</option>
                                             <option value="Ford">Ford</option>
+                                            <option value="Chevrolet">Chevrolet</option>
                                             <option value="BMW">BMW</option>
                                             <option value="Mercedes-Benz">Mercedes-Benz</option>
                                             <option value="Audi">Audi</option>
+                                            <option value="Volkswagen">Volkswagen</option>
+                                            <option value="Volvo">Volvo</option>
+                                            <option value="Porsche">Porsche</option>
+                                            <option value="Jaguar">Jaguar</option>
+                                            <option value="Land Rover">Land Rover</option>
+                                            <option value="Lexus">Lexus</option>
+                                            <option value="Subaru">Subaru</option>
                                             <option value="Hyundai">Hyundai</option>
                                             <option value="Kia">Kia</option>
                                             <option value="Mazda">Mazda</option>
                                             <option value="Nissan">Nissan</option>
+                                            <option value="Mitsubishi">Mitsubishi</option>
+                                            <option value="Suzuki">Suzuki</option>
+                                            <option value="Peugeot">Peugeot</option>
+                                            <option value="Renault">Renault</option>
+                                            <option value="Fiat">Fiat</option>
+                                            <option value="Tesla">Tesla</option>
+                                            <option value="VinFast">VinFast</option>
                                             <option value="Other">Other</option>
                                         </select>
                                     </div>
@@ -173,7 +209,7 @@
                                     <!-- Year -->
                                     <div class="col-md-6 mb-3">
                                         <label for="year" class="form-label">Year <span class="text-danger">*</span></label>
-                                        <select class="form-select" id="year" required>
+                                        <select class="form-select filter-enhance" id="year" required>
                                             <option value="">Select Year</option>
                                         </select>
                                     </div>
@@ -189,8 +225,10 @@
                                     <!-- Condition -->
                                     <div class="col-md-6 mb-3">
                                         <label for="condition" class="form-label">Condition <span class="text-danger">*</span></label>
-                                        <select class="form-select" id="condition" required>
+                                        <select class="form-select filter-enhance" id="condition" required>
                                             <option value="">Select Condition</option>
+                                            <option value="New">New</option>
+                                            <option value="Like New">Like New</option>
                                             <option value="Excellent">Excellent</option>
                                             <option value="Good">Good</option>
                                             <option value="Fair">Fair</option>
@@ -201,10 +239,13 @@
                                     <!-- Transmission -->
                                     <div class="col-md-6 mb-3">
                                         <label for="transmission" class="form-label">Transmission <span class="text-danger">*</span></label>
-                                        <select class="form-select" id="transmission" required>
+                                        <select class="form-select filter-enhance" id="transmission" required>
                                             <option value="">Select Type</option>
-                                            <option value="Automatic">Automatic</option>
-                                            <option value="Manual">Manual</option>
+                                            <option value="Automatic">Automatic (AT)</option>
+                                            <option value="Manual">Manual (MT)</option>
+                                            <option value="CVT">Continuously Variable (CVT)</option>
+                                            <option value="DCT">Dual-Clutch (DCT)</option>
+                                            <option value="Semi-automatic">Semi-automatic</option>
                                         </select>
                                     </div>
                                 </div>
@@ -213,12 +254,13 @@
                                     <!-- Fuel Type -->
                                     <div class="col-md-6 mb-3">
                                         <label for="fuelType" class="form-label">Fuel Type <span class="text-danger">*</span></label>
-                                        <select class="form-select" id="fuelType" required>
+                                        <select class="form-select filter-enhance" id="fuelType" required>
                                             <option value="">Select Fuel Type</option>
-                                            <option value="Petrol">Petrol</option>
-                                            <option value="Diesel">Diesel</option>
-                                            <option value="Electric">Electric</option>
+                                            <option value="Petrol">Petrol (Xăng)</option>
+                                            <option value="Diesel">Diesel (Dầu)</option>
+                                            <option value="Electric">Electric (Điện)</option>
                                             <option value="Hybrid">Hybrid</option>
+                                            <option value="Plug-in Hybrid">Plug-in Hybrid (PHEV)</option>
                                         </select>
                                     </div>
 
@@ -242,24 +284,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Car Reservation Checker Section -->
-                    <div class="form-section" style="border-top: 2px solid rgba(13,110,253,0.35);">
-                        <h5 class="section-title">
-                            <i class="fa-solid fa-search-plus"></i> Kiểm tra trạng thái đặt xe
-                        </h5>
-                        <p class="text-white-50 mb-3">Nhập VIN hoặc biển số để kiểm tra nếu có ai đã đặt mua xe này trước đó</p>
-                        <div class="row mb-2">
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="reservationCheck" placeholder="VIN hoặc biển số để tra cứu...">
-                            </div>
-                            <div class="col-md-4">
-                                <button type="button" class="btn btn-outline-primary w-100" id="checkReservationBtn">
-                                    <i class="fa-solid fa-search"></i> Tra cứu
-                                </button>
-                            </div>
-                        </div>
-                        <div id="reservationResult"></div>
-                    </div>
+                    
                             <!-- Pricing Section -->
                             <div class="form-section">
                                 <h5 class="section-title">
@@ -552,7 +577,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Loading Overlay -->
     <div id="loadingOverlay" class="loading-overlay hidden">
@@ -665,37 +690,13 @@
     <!-- Bootstrap 5 JS Bundle (local) -->
     <script src="../bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- Navigation Script -->
-    <script src="../login/nav-lite.js"></script>
-    
-    <!-- Auth check and user display -->
-    <script>
-        // Display user info if logged in
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-            const authButtons = document.getElementById('authButtons');
-            
-            if (currentUser && authButtons) {
-                authButtons.innerHTML = `
-                    <span class="navbar-text text-white me-3">
-                        <i class="fa-solid fa-user"></i> ${currentUser.fullname || currentUser.email}
-                    </span>
-                    <button onclick="handleLogout()" class="btn btn-outline-light btn-sm">
-                        <i class="fa-solid fa-right-from-bracket"></i> Logout
-                    </button>
-                `;
-            }
-        });
-        
-        function handleLogout() {
-            if (confirm('Bạn có chắc muốn đăng xuất?')) {
-                localStorage.removeItem('currentUser');
-                window.location.href = '../login/login.html';
-            }
-        }
-    </script>
+    <!-- Shared nav behavior for non-index pages -->
+    <script src="../main/nav-core.js"></script>
     
     <!-- Custom JavaScript -->
     <script src="sell.js"></script>
+    
+    <!-- Custom Select Enhancement (load after sell.js so dynamic options like Year are included) -->
+    <script src="../main/js/select-enhance.js"></script>
 </body>
 </html>

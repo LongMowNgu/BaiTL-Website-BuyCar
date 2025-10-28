@@ -1,0 +1,103 @@
+/* Lightweight styles for custom select (index-like) */
+.filter-select-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.filter-native-select {
+  position: absolute !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0; height: 0;
+}
+
+.filter-select-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.45);
+  border-radius: 10px;
+  backdrop-filter: blur(8px);
+  transition: all 0.25s ease;
+}
+
+.filter-select-trigger:hover,
+.filter-select-trigger.open {
+  background: rgba(255,255,255,0.12);
+  border-color: #ffffff;
+}
+
+.filter-select-trigger i { color: #fff; }
+
+.filter-select-panel {
+  position: absolute;
+  left: 0; right: 0;
+  top: calc(100% + 8px);
+  background: rgba(18,18,18,0.98);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+  opacity: 0; visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+  z-index: 50;
+}
+
+.filter-select-panel.open {
+  opacity: 1; visibility: visible;
+  transform: translateY(0);
+}
+
+.filter-select-list {
+  list-style: none;
+  margin: 0; padding: 10px;
+  max-height: 240px;
+  overflow: auto;
+  background: rgba(12,12,12,0.9);
+  border-radius: 10px;
+}
+
+.filter-select-option {
+  width: 100%;
+  text-align: left;
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.95);
+  border-radius: 10px;
+  transition: background .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.filter-select-option:hover {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border-color: #ffffff;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+.filter-select-option.active {
+  background: rgba(13,110,253,0.22);
+  color: #fff;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 3px rgba(13,110,253,0.3) inset;
+}
+
+/* Keyboard accessibility */
+.filter-select-trigger:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 2px;
+}
+
+.filter-select-option:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 2px;
+}

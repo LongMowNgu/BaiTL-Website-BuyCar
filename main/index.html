@@ -163,75 +163,159 @@
     <section id="featured" class="featured-section section-transition py-5">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="display-4 fw-bold text-white">Featured Vehicles</h2>
+                <h2 class="display-4 fw-bold text-white animate-fade-in">Featured Vehicles</h2>
                 <p class="lead text-light">Explore our handpicked selection of premium cars</p>
             </div>
             
-            <div class="row g-4">
+            <!-- Filter Controls -->
+            <div class="featured-filters mb-4">
+                <div class="d-flex justify-content-center flex-wrap gap-2">
+                    <button class="filter-btn active" data-filter="all">
+                        <i class="bi bi-grid-3x3"></i> All Cars
+                    </button>
+                    <button class="filter-btn" data-filter="luxury">
+                        <i class="bi bi-gem"></i> Luxury
+                    </button>
+                    <button class="filter-btn" data-filter="suv">
+                        <i class="bi bi-truck"></i> SUV
+                    </button>
+                    <button class="filter-btn" data-filter="sports">
+                        <i class="bi bi-lightning"></i> Sports
+                    </button>
+                    <button class="filter-btn" data-filter="electric">
+                        <i class="bi bi-ev-front"></i> Electric
+                    </button>
+                </div>
+            </div>
+            
+            <div class="row g-4" id="featuredCarGrid">
                 <!-- Car Card 1 -->
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-4 car-item" data-category="luxury">
                     <div class="card car-card h-100 shadow-sm">
                         <div class="card-img-top-wrapper">
-                            <img src="images/image1.jpg" class="card-img-top" alt="Luxury Sedan">
-                            <span class="badge bg-primary position-absolute top-0 start-0 m-3">Featured</span>
+                            <img src="images/image1.jpg" class="card-img-top" alt="Luxury Sedan" loading="lazy">
+                            <span class="badge bg-primary position-absolute top-0 start-0 m-3">
+                                <i class="bi bi-star-fill"></i> Featured
+                            </span>
+                            <div class="card-overlay">
+                                <button class="overlay-btn" title="Quick View">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="overlay-btn" title="Add to Wishlist">
+                                    <i class="bi bi-heart"></i>
+                                </button>
+                                <button class="overlay-btn" title="Compare">
+                                    <i class="bi bi-arrow-left-right"></i>
+                                </button>
+                            </div>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Mercedes-Benz E-Class</h5>
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title mb-0">Mercedes-Benz E-Class</h5>
+                                <span class="badge bg-success">Verified</span>
+                            </div>
                             <p class="text-muted mb-2">
                                 <i class="bi bi-calendar3"></i> 2023 | 
                                 <i class="bi bi-speedometer2"></i> 15,000 km | 
                                 <i class="bi bi-fuel-pump"></i> Petrol
                             </p>
-                            <p class="card-text">Luxury sedan with premium features and exceptional performance.</p>
+                            <p class="card-text small">Luxury sedan with premium features and exceptional performance.</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <h4 class="text-primary mb-0">$75,000</h4>
-                                <a href="pages/car-details.html" class="btn btn-outline-primary">View Details</a>
+                                <div>
+                                    <h4 class="text-primary mb-0">$75,000</h4>
+                                    <small class="text-muted">Est. $1,250/mo</small>
+                                </div>
+                                <a href="pages/car-details.html" class="btn btn-outline-primary btn-sm">
+                                    View <i class="bi bi-arrow-right"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Car Card 2 -->
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-4 car-item" data-category="suv">
                     <div class="card car-card h-100 shadow-sm">
                         <div class="card-img-top-wrapper">
-                            <img src="images/image2.jpg" class="card-img-top" alt="SUV">
-                            <span class="badge bg-success position-absolute top-0 start-0 m-3">New</span>
+                            <img src="images/image2.jpg" class="card-img-top" alt="SUV" loading="lazy">
+                            <span class="badge bg-success position-absolute top-0 start-0 m-3">
+                                <i class="bi bi-stars"></i> New
+                            </span>
+                            <div class="card-overlay">
+                                <button class="overlay-btn" title="Quick View">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="overlay-btn" title="Add to Wishlist">
+                                    <i class="bi bi-heart"></i>
+                                </button>
+                                <button class="overlay-btn" title="Compare">
+                                    <i class="bi bi-arrow-left-right"></i>
+                                </button>
+                            </div>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Toyota RAV4 Hybrid</h5>
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title mb-0">Toyota RAV4 Hybrid</h5>
+                                <span class="badge bg-success">Verified</span>
+                            </div>
                             <p class="text-muted mb-2">
                                 <i class="bi bi-calendar3"></i> 2024 | 
                                 <i class="bi bi-speedometer2"></i> 5,000 km | 
                                 <i class="bi bi-fuel-pump"></i> Hybrid
                             </p>
-                            <p class="card-text">Eco-friendly SUV with cutting-edge hybrid technology.</p>
+                            <p class="card-text small">Eco-friendly SUV with cutting-edge hybrid technology.</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <h4 class="text-primary mb-0">$42,500</h4>
-                                <a href="pages/car-details.html" class="btn btn-outline-primary">View Details</a>
+                                <div>
+                                    <h4 class="text-primary mb-0">$42,500</h4>
+                                    <small class="text-muted">Est. $710/mo</small>
+                                </div>
+                                <a href="pages/car-details.html" class="btn btn-outline-primary btn-sm">
+                                    View <i class="bi bi-arrow-right"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Car Card 3 -->
-                <div class="col-md-6 col-lg-4">
+                <div class="col-md-6 col-lg-4 car-item" data-category="sports">
                     <div class="card car-card h-100 shadow-sm">
                         <div class="card-img-top-wrapper">
-                            <img src="images/image3.jpg" class="card-img-top" alt="Sports Car">
-                            <span class="badge bg-danger position-absolute top-0 start-0 m-3">Hot Deal</span>
+                            <img src="images/image3.jpg" class="card-img-top" alt="Sports Car" loading="lazy">
+                            <span class="badge bg-danger position-absolute top-0 start-0 m-3">
+                                <i class="bi bi-fire"></i> Hot Deal
+                            </span>
+                            <div class="card-overlay">
+                                <button class="overlay-btn" title="Quick View">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button class="overlay-btn" title="Add to Wishlist">
+                                    <i class="bi bi-heart"></i>
+                                </button>
+                                <button class="overlay-btn" title="Compare">
+                                    <i class="bi bi-arrow-left-right"></i>
+                                </button>
+                            </div>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">BMW M3 Competition</h5>
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title mb-0">BMW M3 Competition</h5>
+                                <span class="badge bg-success">Verified</span>
+                            </div>
                             <p class="text-muted mb-2">
                                 <i class="bi bi-calendar3"></i> 2023 | 
                                 <i class="bi bi-speedometer2"></i> 8,000 km | 
                                 <i class="bi bi-fuel-pump"></i> Petrol
                             </p>
-                            <p class="card-text">High-performance sports sedan for enthusiasts.</p>
+                            <p class="card-text small">High-performance sports sedan for enthusiasts.</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <h4 class="text-primary mb-0">$89,900</h4>
-                                <a href="pages/car-details.html" class="btn btn-outline-primary">View Details</a>
+                                <div>
+                                    <h4 class="text-primary mb-0">$89,900</h4>
+                                    <small class="text-muted">Est. $1,498/mo</small>
+                                </div>
+                                <a href="pages/car-details.html" class="btn btn-outline-primary btn-sm">
+                                    View <i class="bi bi-arrow-right"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -240,7 +324,7 @@
             
             <!-- View All Button -->
             <div class="text-center mt-5">
-                <a href="pages/browse.html" class="btn btn-primary btn-lg">
+                <a href="pages/browse.html" class="btn btn-primary btn-lg pulse-btn">
                     View All Vehicles <i class="bi bi-arrow-right"></i>
                 </a>
             </div>

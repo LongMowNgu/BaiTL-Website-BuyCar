@@ -66,17 +66,79 @@ const priceComparison = document.getElementById('priceComparison');
 const formProgressTop = document.getElementById('formProgressTop');
 
 // ===================================
+// Toast Notification Helper (Contact-style)
+// ===================================
+(function ensureToastContainer() {
+    if (!document.querySelector('.toast-container')) {
+        const container = document.createElement('div');
+        container.className = 'toast-container';
+        document.body.appendChild(container);
+    }
+})();
+
+function showToast(type = 'info', title = '', message = '', duration = 5000) {
+    const container = document.querySelector('.toast-container');
+    if (!container) return;
+
+    const toast = document.createElement('div');
+    toast.className = `toast-notification toast-${type}`;
+
+    const icons = {
+        success: 'fa-circle-check',
+        error: 'fa-circle-xmark',
+        warning: 'fa-triangle-exclamation',
+        info: 'fa-circle-info'
+    };
+
+    toast.innerHTML = `
+        <i class="fa-solid ${icons[type] || icons.info} toast-icon"></i>
+        <div class="toast-content">
+            <div class="toast-title">${title}</div>
+            <div class="toast-message">${message}</div>
+        </div>
+        <button class="toast-close" aria-label="Close">&times;</button>
+        <div class="toast-progress"></div>
+    `;
+
+    const progress = toast.querySelector('.toast-progress');
+    if (progress) progress.style.animationDuration = `${duration}ms`;
+
+    // Close handler
+    toast.querySelector('.toast-close').addEventListener('click', () => hideToast(toast));
+
+    container.appendChild(toast);
+
+    // Auto-hide
+    const timer = setTimeout(() => hideToast(toast), duration);
+
+    function hideToast(el) {
+        el.classList.add('toast-hiding');
+        el.addEventListener('animationend', () => {
+            clearTimeout(timer);
+            el.remove();
+        }, { once: true });
+    }
+}
+
+// ===================================
 // Progress Steps Management
 // ===================================
 
-const steps = document.querySelectorAll('.step');
-const stepLines = document.querySelectorAll('.step-line');
+const stepItems = document.querySelectorAll('.step-item');
+const overallProgress = document.getElementById('overallProgress');
 let currentStep = 1;
 
 function updateProgressSteps(step) {
     currentStep = step;
     
-    steps.forEach((stepEl, index) => {
+    // Update progress bar
+    const progressPercentage = (step / 4) * 100;
+    if (overallProgress) {
+        overallProgress.style.width = progressPercentage + '%';
+    }
+    
+    // Update step items
+    stepItems.forEach((stepEl, index) => {
         const stepNumber = index + 1;
         
         if (stepNumber < step) {
@@ -87,14 +149,6 @@ function updateProgressSteps(step) {
             stepEl.classList.remove('completed');
         } else {
             stepEl.classList.remove('active', 'completed');
-        }
-    });
-    
-    stepLines.forEach((line, index) => {
-        if (index < step - 1) {
-            line.classList.add('completed');
-        } else {
-            line.classList.remove('completed');
         }
     });
 }
@@ -324,20 +378,20 @@ carImagesInput.addEventListener('change', (e) => {
 function handleImageFiles(files) {
     // Limit to 10 images
     if (uploadedImages.length + files.length > 10) {
-        alert('You can upload a maximum of 10 images');
+        showToast('warning', 'Limit Reached', 'You can upload a maximum of 10 images', 3500);
         return;
     }
     
     files.forEach(file => {
         // Validate file type
         if (!file.type.startsWith('image/')) {
-            alert('Please upload only image files');
+            showToast('error', 'Invalid File', 'Please upload only image files', 3500);
             return;
         }
         
         // Validate file size (max 5MB)
         if (file.size > 5 * 1024 * 1024) {
-            alert(`${file.name} is too large. Each image must be less than 5MB`);
+            showToast('warning', 'File Too Large', `${file.name} is too large. Each image must be less than 5MB`, 4500);
             return;
         }
         
@@ -723,7 +777,7 @@ aiSuggestionBtn.addEventListener('click', () => {
     const condition = conditionInput.value;
     
     if (!brand || !model || !year) {
-        alert('Please fill in Brand, Model, and Year first to get AI suggestions');
+        showToast('warning', 'Action Needed', 'Please fill in Brand, Model, and Year first to get AI suggestions', 3500);
         return;
     }
     
@@ -799,6 +853,7 @@ saveDraftBtn.addEventListener('click', () => {
     };
     
     localStorage.setItem('carListingDraft', JSON.stringify(draftData));
+    showToast('success', 'Draft Saved', 'Your listing draft has been saved', 3000);
     
     // Show success feedback
     const originalText = saveDraftBtn.innerHTML;
@@ -818,39 +873,59 @@ function loadDraft() {
     const draft = localStorage.getItem('carListingDraft');
     
     if (draft) {
-        const confirmed = confirm('You have a saved draft. Would you like to load it?');
+        // Show toast notification instead of alert
+        showToast('info', 'Draft Available', 'You have a saved draft. Click "Load Draft" button to restore it.', 5000);
         
-        if (confirmed) {
-            const data = JSON.parse(draft);
+        // Add visual indicator on save draft button
+        const saveDraftBtn = document.getElementById('saveDraftBtn');
+        if (saveDraftBtn) {
+            saveDraftBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-down"></i> Load Draft';
+            saveDraftBtn.classList.add('btn-info');
+            saveDraftBtn.classList.remove('btn-outline-secondary');
             
-            carTitleInput.value = data.title || '';
-            brandInput.value = data.brand || '';
-            modelInput.value = data.model || '';
-            yearInput.value = data.year || '';
-            mileageInput.value = data.mileage || '';
-            conditionInput.value = data.condition || '';
-            transmissionInput.value = data.transmission || '';
-            fuelTypeInput.value = data.fuelType || '';
-            colorInput.value = data.color || '';
-            priceInput.value = data.price || '';
-            negotiableInput.checked = data.negotiable || false;
-            descriptionInput.value = data.description || '';
-            sellerNameInput.value = data.sellerName || '';
-            sellerPhoneInput.value = data.sellerPhone || '';
-            sellerEmailInput.value = data.sellerEmail || '';
-            locationInput.value = data.location || '';
-            
-            // Trigger input events to update previews
-            carTitleInput.dispatchEvent(new Event('input'));
-            priceInput.dispatchEvent(new Event('input'));
-            descriptionInput.dispatchEvent(new Event('input'));
-            sellerNameInput.dispatchEvent(new Event('input'));
-            sellerPhoneInput.dispatchEvent(new Event('input'));
-            locationInput.dispatchEvent(new Event('input'));
-            yearInput.dispatchEvent(new Event('change'));
-            mileageInput.dispatchEvent(new Event('input'));
-            transmissionInput.dispatchEvent(new Event('change'));
-            fuelTypeInput.dispatchEvent(new Event('change'));
+            // Change behavior to load draft on first click
+            saveDraftBtn.addEventListener('click', function loadHandler() {
+                const data = JSON.parse(draft);
+                
+                carTitleInput.value = data.title || '';
+                brandInput.value = data.brand || '';
+                modelInput.value = data.model || '';
+                yearInput.value = data.year || '';
+                mileageInput.value = data.mileage || '';
+                conditionInput.value = data.condition || '';
+                transmissionInput.value = data.transmission || '';
+                fuelTypeInput.value = data.fuelType || '';
+                colorInput.value = data.color || '';
+                priceInput.value = data.price || '';
+                negotiableInput.checked = data.negotiable || false;
+                descriptionInput.value = data.description || '';
+                sellerNameInput.value = data.sellerName || '';
+                sellerPhoneInput.value = data.sellerPhone || '';
+                sellerEmailInput.value = data.sellerEmail || '';
+                locationInput.value = data.location || '';
+                
+                // Trigger input events to update previews
+                carTitleInput.dispatchEvent(new Event('input'));
+                priceInput.dispatchEvent(new Event('input'));
+                descriptionInput.dispatchEvent(new Event('input'));
+                sellerNameInput.dispatchEvent(new Event('input'));
+                sellerPhoneInput.dispatchEvent(new Event('input'));
+                locationInput.dispatchEvent(new Event('input'));
+                yearInput.dispatchEvent(new Event('change'));
+                mileageInput.dispatchEvent(new Event('input'));
+                transmissionInput.dispatchEvent(new Event('change'));
+                fuelTypeInput.dispatchEvent(new Event('change'));
+                
+                showToast('success', 'Draft Restored', 'Your previous draft has been loaded successfully', 3000);
+                
+                // Reset button to normal save draft behavior
+                saveDraftBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Save Draft';
+                saveDraftBtn.classList.remove('btn-info');
+                saveDraftBtn.classList.add('btn-outline-secondary');
+                
+                // Remove this event listener
+                saveDraftBtn.removeEventListener('click', loadHandler);
+            }, { once: true });
         }
     }
 }
@@ -860,7 +935,8 @@ clearFormBtn.addEventListener('click', () => {
     const confirmed = confirm('Are you sure you want to clear all form data? This action cannot be undone.');
     
     if (confirmed) {
-        resetForm();
+    resetForm();
+    showToast('info', 'Form Cleared', 'All fields have been reset', 2500);
         localStorage.removeItem('carListingDraft');
         
         // Show feedback
@@ -881,7 +957,7 @@ sellCarForm.addEventListener('submit', async (e) => {
     // Validate phone
     const phone = sellerPhoneInput.value.trim();
     if (!validatePhone(phone)) {
-        alert('Please enter a valid Vietnamese phone number');
+        showToast('error', 'Invalid Phone', 'Please enter a valid Vietnamese phone number', 3500);
         sellerPhoneInput.focus();
         return;
     }
@@ -889,14 +965,14 @@ sellCarForm.addEventListener('submit', async (e) => {
     // Validate email
     const email = sellerEmailInput.value.trim();
     if (!validateEmail(email)) {
-        alert('Please enter a valid email address');
+        showToast('error', 'Invalid Email', 'Please enter a valid email address', 3500);
         sellerEmailInput.focus();
         return;
     }
     
     // Check if images are uploaded
     if (uploadedImages.length === 0) {
-        alert('Please upload at least one image of your car');
+        showToast('warning', 'Missing Images', 'Please upload at least one image of your car', 3500);
         carImagesInput.focus();
         return;
     }
@@ -943,8 +1019,9 @@ sellCarForm.addEventListener('submit', async (e) => {
         // Hide loading overlay
         loadingOverlay.classList.add('hidden');
         
-        // Show success overlay
+    // Show success overlay
         successOverlay.classList.remove('hidden');
+    showToast('success', 'Listing Submitted', 'Your car listing has been submitted successfully!', 4000);
         
         // Clear draft from localStorage
         localStorage.removeItem('carListingDraft');
@@ -1209,3 +1286,169 @@ console.log('%c AutoTrade - Sell Your Car ', 'background: linear-gradient(135deg
 console.log('%c List your vehicle and reach thousands of potential buyers! ', 'font-size: 12px; color: #6c757d;');
 console.log('%c New Features: Progress Steps, Price Comparison, Tooltips, Scroll Progress, Confetti Animation ', 'font-size: 11px; color: #198754; font-weight: bold;');
 console.log('%c Interactive UI: Drag & Drop, AI Suggestions, Real-time Preview, Mobile View ', 'font-size: 11px; color: #0dcaf0; font-weight: bold;');
+
+// ===================================
+// Enhanced Interactive Features
+// ===================================
+
+// Show navbar on scroll
+window.addEventListener('scroll', function() {
+    const navbar = document.getElementById('mainNav');
+    if (window.scrollY > 50) {
+        navbar.classList.add('navbar-visible');
+        navbar.classList.remove('navbar-hidden');
+    }
+});
+
+// Show navbar immediately for sell page
+document.addEventListener('DOMContentLoaded', function() {
+    const navbar = document.getElementById('mainNav');
+    setTimeout(() => {
+        navbar.classList.add('navbar-visible');
+        navbar.classList.remove('navbar-hidden');
+    }, 100);
+});
+
+// Add tooltip for form fields
+function addTooltips() {
+    const tooltipTriggers = document.querySelectorAll('[data-tooltip]');
+    
+    tooltipTriggers.forEach(trigger => {
+        trigger.style.position = 'relative';
+        trigger.style.cursor = 'help';
+        
+        trigger.addEventListener('mouseenter', function(e) {
+            const tooltipText = this.getAttribute('data-tooltip');
+            const tooltip = document.createElement('div');
+            tooltip.className = 'custom-tooltip';
+            tooltip.textContent = tooltipText;
+            tooltip.style.cssText = `
+                position: absolute;
+                bottom: 100%;
+                left: 50%;
+                transform: translateX(-50%) translateY(-8px);
+                background: rgba(0, 0, 0, 0.9);
+                color: white;
+                padding: 8px 12px;
+                border-radius: 6px;
+                font-size: 0.85rem;
+                white-space: nowrap;
+                z-index: 1000;
+                pointer-events: none;
+                animation: fadeIn 0.2s ease;
+            `;
+            
+            this.appendChild(tooltip);
+        });
+        
+        trigger.addEventListener('mouseleave', function() {
+            const tooltip = this.querySelector('.custom-tooltip');
+            if (tooltip) tooltip.remove();
+        });
+    });
+}
+
+// Enhanced field validation with visual feedback
+function enhanceFieldValidation() {
+    const requiredFields = document.querySelectorAll('input[required], textarea[required], select[required]');
+    
+    requiredFields.forEach(field => {
+        field.addEventListener('blur', function() {
+            if (this.value.trim() === '') {
+                this.style.borderColor = '#dc3545';
+                this.classList.add('shake-animation');
+                setTimeout(() => this.classList.remove('shake-animation'), 500);
+            } else {
+                this.style.borderColor = '#198754';
+                this.classList.add('success-glow');
+                setTimeout(() => this.classList.remove('success-glow'), 1000);
+            }
+        });
+        
+        field.addEventListener('input', function() {
+            if (this.value.trim() !== '') {
+                this.style.borderColor = '';
+            }
+        });
+    });
+}
+
+// Add shake animation CSS
+const shakeStyle = document.createElement('style');
+shakeStyle.textContent = `
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-10px); }
+        75% { transform: translateX(10px); }
+    }
+    .shake-animation {
+        animation: shake 0.3s ease;
+    }
+    .success-glow {
+        box-shadow: 0 0 10px rgba(25, 135, 84, 0.5);
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateX(-50%) translateY(-12px); }
+        to { opacity: 1; transform: translateX(-50%) translateY(-8px); }
+    }
+`;
+document.head.appendChild(shakeStyle);
+
+// Initialize enhanced features
+addTooltips();
+enhanceFieldValidation();
+
+// Add smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Add loading state to submit button
+if (sellCarForm) {
+    const submitBtn = sellCarForm.querySelector('button[type="submit"]');
+    sellCarForm.addEventListener('submit', function() {
+        if (submitBtn) {
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Processing...';
+            submitBtn.disabled = true;
+        }
+    });
+}
+
+// Add success animation to completed steps
+stepItems.forEach(step => {
+    step.addEventListener('click', function() {
+        if (this.classList.contains('completed')) {
+            this.classList.add('bounce-animation');
+            setTimeout(() => this.classList.remove('bounce-animation'), 600);
+        }
+    });
+});
+
+// Add bounce animation
+const bounceStyle = document.createElement('style');
+bounceStyle.textContent = `
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+    .bounce-animation {
+        animation: bounce 0.6s ease;
+    }
+`;
+document.head.appendChild(bounceStyle);
+
+// Console success message
+console.log('%c ✓ Interactive Features Loaded! ', 'background: #198754; color: white; font-size: 14px; padding: 6px; font-weight: bold; border-radius: 4px;');
+
