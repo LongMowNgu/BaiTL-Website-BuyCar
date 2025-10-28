@@ -3,28 +3,6 @@
 // ===================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Check if user is logged in
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (!currentUser) {
-        // Redirect to login page if not logged in
-        alert('Vui lòng đăng nhập để truy cập trang chủ');
-        window.location.href = '../login/login.html';
-        return;
-    }
-
-    // Update navbar with user info
-    const authButtonsContainer = document.getElementById('authButtons');
-    if (authButtonsContainer && currentUser) {
-        authButtonsContainer.innerHTML = `
-            <span class="navbar-text text-white me-2" style="font-size: 0.9rem;">
-                <i class="bi bi-person-circle"></i> ${currentUser.fullname || currentUser.email}
-            </span>
-            <button class="btn btn-auth-outline" onclick="handleLogout()" style="border-radius: 20px;">
-                <i class="bi bi-box-arrow-right"></i> Logout
-            </button>
-        `;
-    }
-
     const landingAnimation = document.getElementById('landingAnimation');
     const navbar = document.getElementById('mainNav');
     const heroSection = document.getElementById('why-choose-us');
@@ -107,18 +85,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial check
     handleLandingScroll();
 });
-
-// ===================================
-// Logout Handler
-// ===================================
-
-function handleLogout() {
-    if (confirm('Bạn có chắc muốn đăng xuất?')) {
-        localStorage.removeItem('currentUser');
-        alert('Đăng xuất thành công!');
-        window.location.href = '../login/login.html';
-    }
-}
 
 // ===================================
 // Smooth Scrolling for Navigation Links
@@ -986,3 +952,4 @@ document.addEventListener('DOMContentLoaded', function() {
     // Removed click-outside-to-close behavior
     // Filters now only close when the filter toggle button is clicked again
 });
+

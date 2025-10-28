@@ -6,11 +6,11 @@
     <meta name="description" content="Buy and sell cars online - Your trusted vehicle trading platform">
     <title>LuxAuto - Buy & Sell Cars Online</title>
     
-    <!-- Bootstrap 5 CSS (local) -->
+    <!-- Bootstrap 5 CSS -->
     <link href="../bootstrap-5.3.8-dist/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../bootstrap-5.3.8-dist/font/bootstrap-icons.css">
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
@@ -18,8 +18,8 @@
 <body class="page-fade-in">
     <!-- Full-page Landing Animation -->
     <div id="landingAnimation" class="landing-animation">
-            <video id="landingVideo" autoplay muted loop playsinline>
-            <source src="../img/main_landing_page_animation.mp4" type="video/mp4">
+        <video id="landingVideo" autoplay muted loop playsinline>
+            <source src="../img/animation/main_landing_page_animation.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
         
@@ -83,7 +83,7 @@
                     </select>
                     
                     <!-- Advanced Filter Button -->
-                    <a href="../pages/browse.html" class="landing-advanced-filter-btn">
+                    <a href="pages/browse.html" class="landing-advanced-filter-btn">
                         <i class="bi bi-sliders"></i> Advanced Filter
                     </a>
                 </div>
@@ -122,21 +122,21 @@
                         <a class="nav-link" href="#buy-cars">Buy Cars</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../sell/sell.html">Sell Cars</a>
+                        <a class="nav-link" href="#sell-cars">Sell Cars</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#featured">Featured Cars</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../contact/contact.html">Contact</a>
+                        <a class="nav-link" href="#contact">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <!-- User info and logout -->
-                        <div class="btn-group ms-lg-2" role="group" id="authButtons">
-                            <a href="../login/login.html" class="btn btn-auth-outline pill-btn-left">
+                        <!-- Authentication buttons use monochrome styling -->
+                        <div class="btn-group ms-lg-2" role="group">
+                            <a href="pages/login.html" class="btn btn-auth-outline pill-btn-left">
                                 Login
                             </a>
-                            <a href="../register/register.html" class="btn btn-auth-solid pill-btn-right">
+                            <a href="pages/register.html" class="btn btn-auth-solid pill-btn-right">
                                 Register
                             </a>
                         </div>
@@ -185,7 +185,7 @@
                             <p class="card-text">Luxury sedan with premium features and exceptional performance.</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <h4 class="text-primary mb-0">$75,000</h4>
-                                <a href="../pages/car-details.html" class="btn btn-outline-primary">View Details</a>
+                                <a href="pages/car-details.html" class="btn btn-outline-primary">View Details</a>
                             </div>
                         </div>
                     </div>
@@ -208,7 +208,7 @@
                             <p class="card-text">Eco-friendly SUV with cutting-edge hybrid technology.</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <h4 class="text-primary mb-0">$42,500</h4>
-                                <a href="../pages/car-details.html" class="btn btn-outline-primary">View Details</a>
+                                <a href="pages/car-details.html" class="btn btn-outline-primary">View Details</a>
                             </div>
                         </div>
                     </div>
@@ -231,7 +231,7 @@
                             <p class="card-text">High-performance sports sedan for enthusiasts.</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <h4 class="text-primary mb-0">$89,900</h4>
-                                <a href="../pages/car-details.html" class="btn btn-outline-primary">View Details</a>
+                                <a href="pages/car-details.html" class="btn btn-outline-primary">View Details</a>
                             </div>
                         </div>
                     </div>
@@ -240,7 +240,7 @@
             
             <!-- View All Button -->
             <div class="text-center mt-5">
-                <a href="../pages/browse.html" class="btn btn-primary btn-lg">
+                <a href="pages/browse.html" class="btn btn-primary btn-lg">
                     View All Vehicles <i class="bi bi-arrow-right"></i>
                 </a>
             </div>
@@ -280,7 +280,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6 d-none d-lg-block">
-                    <img src="img/image4.jpg" alt="LuxAuto Experience" class="img-fluid">
+                    <img src="../img/image4.jpg" alt="LuxAuto Experience" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -491,7 +491,7 @@
             
             <!-- CTA Button -->
             <div class="text-center">
-                <a href="../sell/sell.html" class="btn btn-primary btn-lg">
+                <a href="pages/sell.html" class="btn btn-primary btn-lg">
                     Start Selling Now <i class="bi bi-arrow-right"></i>
                 </a>
             </div>
@@ -513,7 +513,7 @@
                         <div class="partner-content">
                             <h5 class="partner-name">Ferrari</h5>
                             <p class="partner-description">Hand-built Italian supercars with uncompromising track pedigree.</p>
-                            <a href="../pages/browse.html#ferrari" class="partner-link">Explore Ferrari</a>
+                            <a href="pages/browse.html#ferrari" class="partner-link">Explore Ferrari</a>
                         </div>
                     </div>
                 </div>
@@ -524,7 +524,7 @@
                         <div class="partner-content">
                             <h5 class="partner-name">Bugatti</h5>
                             <p class="partner-description">Record-breaking hypercars that unite artistry and engineering.</p>
-                            <a href="../pages/browse.html#bugatti" class="partner-link">Discover Bugatti</a>
+                            <a href="pages/browse.html#bugatti" class="partner-link">Discover Bugatti</a>
                         </div>
                     </div>
                 </div>
@@ -535,7 +535,7 @@
                         <div class="partner-content">
                             <h5 class="partner-name">Lamborghini</h5>
                             <p class="partner-description">Dramatic design and V12 performance built for the spotlight.</p>
-                            <a href="../pages/browse.html#lamborghini" class="partner-link">View Lamborghini</a>
+                            <a href="pages/browse.html#lamborghini" class="partner-link">View Lamborghini</a>
                         </div>
                     </div>
                 </div>
@@ -546,7 +546,7 @@
                         <div class="partner-content">
                             <h5 class="partner-name">Rolls-Royce</h5>
                             <p class="partner-description">Bespoke craftsmanship that redefines modern luxury travel.</p>
-                            <a href="../pages/browse.html#rolls-royce" class="partner-link">Experience Rolls-Royce</a>
+                            <a href="pages/browse.html#rolls-royce" class="partner-link">Experience Rolls-Royce</a>
                         </div>
                     </div>
                 </div>
@@ -641,7 +641,7 @@
             
             <!-- CTA Button -->
             <div class="text-center mt-5">
-                <a href="../testimonials.html" class="btn btn-primary btn-lg">
+                <a href="pages/testimonials.html" class="btn btn-primary btn-lg">
                     Read More Reviews <i class="bi bi-arrow-right"></i>
                 </a>
             </div>
@@ -662,7 +662,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Top Hybrid Cars To Watch In 2025</h5>
                                 <p class="card-text text-muted">Discover the most efficient and stylish hybrid vehicles entering the market.</p>
-                                <a href="../blog.html" class="stretched-link">Read Article</a>
+                                <a href="pages/blog.html" class="stretched-link">Read Article</a>
                             </div>
                         </div>
                     </div>
@@ -673,7 +673,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Luxury Market Trends You Should Know</h5>
                                 <p class="card-text text-muted">See how luxury automotive demand is evolving across regions worldwide.</p>
-                                <a href="../blog.html" class="stretched-link">Read Article</a>
+                                <a href="pages/blog.html" class="stretched-link">Read Article</a>
                             </div>
                         </div>
                     </div>
@@ -684,7 +684,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">A Seller's Checklist For Faster Deals</h5>
                                 <p class="card-text text-muted">Follow these simple steps to prepare your car and close deals quickly.</p>
-                                <a href="../blog.html" class="stretched-link">Read Article</a>
+                                <a href="pages/blog.html" class="stretched-link">Read Article</a>
                             </div>
                         </div>
                     </div>
@@ -944,8 +944,8 @@
                     <ul class="footer-nav">
                         <li><a href="#faq">FAQ</a></li>
                         <li><a href="#contact">Contact</a></li>
-                        <li><a href="../financing.html">Financing</a></li>
-                        <li><a href="../login/login.html">Dealer Portal</a></li>
+                        <li><a href="pages/financing.html">Financing</a></li>
+                        <li><a href="pages/login.html">Dealer Portal</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -964,8 +964,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="footer-bottom-links">
-                        <a href="../pages/privacy.html">Privacy Policy</a>
-                        <a href="../pages/terms.html">Terms of Service</a>
+                        <a href="pages/privacy.html">Privacy Policy</a>
+                        <a href="pages/terms.html">Terms of Service</a>
                         <a href="#partners">Our Partners</a>
                     </div>
                 </div>
@@ -978,7 +978,7 @@
         <i class="bi bi-arrow-up"></i>
     </button>
 
-    <!-- Bootstrap 5 JS Bundle (local) -->
+    <!-- Bootstrap 5 JS Bundle -->
     <script src="../bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
     
     <!-- Custom JavaScript -->
