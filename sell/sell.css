@@ -20,6 +20,12 @@
     box-sizing: border-box;
 }
 
+/* Inline icon spacing for icon+text pairs on Sell page */
+h1 i, h2 i, h3 i, h4 i, h5 i, h6 i,
+label i, p i, a i, button i { margin-right: 0.25em; }
+/* Avoid shifting standalone decorative icons */
+.step-circle i, .toast-icon { margin-right: 0; }
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
@@ -918,6 +924,14 @@ textarea.form-control {
     border-width: 2px;
     font-weight: 600;
     transition: all 0.3s ease;
+}
+
+/* Clearer disabled state for buttons */
+.btn:disabled,
+button[disabled] {
+    opacity: 0.6 !important;
+    cursor: not-allowed !important;
+    filter: grayscale(10%);
 }
 
 .btn-outline-danger {

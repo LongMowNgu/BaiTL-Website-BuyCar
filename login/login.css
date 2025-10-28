@@ -233,6 +233,7 @@ input[type="text"]:focus::placeholder,
   display:flex; 
   gap:12px; 
   margin-top: 4px;
+  flex-wrap: wrap;
 }
 
 /* Buttons - improved gradients and hover states */
@@ -244,7 +245,7 @@ input[type="text"]:focus::placeholder,
   box-shadow: 0 12px 30px rgba(11,94,215,0.22);
 }
 
-.social {
+.social { 
   flex:1; 
   padding:12px; 
   border-radius:10px; 
@@ -261,6 +262,9 @@ input[type="text"]:focus::placeholder,
   position: relative;
   overflow: hidden;
 }
+
+/* Make two per row */
+.socials .social { flex: 1 1 calc(50% - 6px); min-width: calc(50% - 6px); }
 
 .social::before {
   content: '';
@@ -317,8 +321,31 @@ input[type="text"]:focus::placeholder,
   transform: translateY(-2px);
 }
 
+/* New social variants */
+.social.facebook {
+  background: #1877f2;
+  color: #fff;
+  border-color: #1463d1;
+}
+.social.facebook:hover {
+  background: #166fe0;
+  box-shadow: 0 8px 22px rgba(24, 119, 242, 0.35);
+  transform: translateY(-2px);
+}
+
+.social.telegram {
+  background: #229ED9;
+  color: #fff;
+  border-color: #1f86ba;
+}
+.social.telegram:hover {
+  background: #1e8ec3;
+  box-shadow: 0 8px 22px rgba(34, 158, 217, 0.35);
+  transform: translateY(-2px);
+}
+
 /* Button icon tweaks (Font Awesome) */
-.btn i, .btn .fa-solid, .btn .fa-brands { margin-right: 10px; font-size: 18px; vertical-align: middle; }
+.btn i, .btn .fa-solid, .btn .fa-brands { margin-right: 0.25em; font-size: 18px; vertical-align: middle; }
 .btn .btn-text { vertical-align: middle; }
 
 .social:active {
@@ -754,8 +781,8 @@ input:focus {
    =================================== */
 #mainNav .btn-group .btn.btn-auth-outline,
 #mainNav .btn-group .btn.btn-auth-solid,
-#mainNav .btn.btn-auth-outline.pill-btn-left,
-#mainNav .btn.btn-auth-solid.pill-btn-right {
+#mainNav .btn.btn-auth-solid.pill-btn-left,
+#mainNav .btn.btn-auth-outline.pill-btn-right {
     border: 2px solid rgba(255,255,255,0.9) !important;
     font-weight: 600 !important;
     padding: 0.6rem 2rem !important;
@@ -765,30 +792,37 @@ input:focus {
     display: inline-block !important;
 }
 
-#mainNav .btn.btn-auth-outline.pill-btn-left {
-    background-color: #000000 !important;
-    color: #ffffff !important;
-    border-radius: 50px 0 0 50px !important;
-    border-right: 1px solid rgba(255,255,255,0.9) !important;
+#mainNav .btn.btn-auth-solid.pill-btn-left {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-radius: 50px 0 0 50px !important;
+  border-right: 1px solid rgba(255,255,255,0.9) !important;
+  box-shadow: 0 6px 18px rgba(255,255,255,0.25);
+  animation: authGlow 2.4s ease-in-out infinite;
 }
 
-#mainNav .btn.btn-auth-outline.pill-btn-left:hover {
-    background-color: #1a1a1a !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+#mainNav .btn.btn-auth-solid.pill-btn-left:hover {
+  background-color: #f4f4f4 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(255,255,255,0.35);
 }
 
-#mainNav .btn.btn-auth-solid.pill-btn-right {
-    background-color: #ffffff !important;
-    color: #000000 !important;
-    border-radius: 0 50px 50px 0 !important;
-    border-left: 1px solid rgba(255,255,255,0.9) !important;
+#mainNav .btn.btn-auth-outline.pill-btn-right {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border-radius: 0 50px 50px 0 !important;
+  border-left: 1px solid rgba(255,255,255,0.9) !important;
 }
 
-#mainNav .btn.btn-auth-solid.pill-btn-right:hover {
-    background-color: #f0f0f0 !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255,255,255,0.2);
+#mainNav .btn.btn-auth-outline.pill-btn-right:hover {
+  background-color: #1a1a1a !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+@keyframes authGlow {
+  0%, 100% { box-shadow: 0 6px 18px rgba(255,255,255,0.25); }
+  50% { box-shadow: 0 10px 30px rgba(255,255,255,0.45); }
 }
 
 #mainNav .btn-group {

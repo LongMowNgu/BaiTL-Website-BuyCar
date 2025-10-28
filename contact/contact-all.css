@@ -26,6 +26,14 @@
     box-sizing: border-box;
 }
 
+/* Inline icon spacing for icon+text pairs */
+h1 i, h2 i, h3 i, h4 i, h5 i, h6 i,
+label i, p i, a i, button i { margin-right: 0.25em; }
+/* Avoid shifting standalone decorative icons */
+.stat-icon i, .social-btn i, .contact-info-card > i,
+.copy-btn i, .action-btn i,
+.live-chat-card .chat-pulse-container i { margin-right: 0; }
+
 html {
     scroll-behavior: smooth;
     height: 100%;
@@ -839,6 +847,11 @@ textarea.form-control {
     padding: 1.5rem;
     backdrop-filter: blur(10px);
     transition: var(--transition-smooth);
+    /* Align heights and content for the two top boxes */
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .social-card:hover, .live-chat-card:hover {
@@ -1534,6 +1547,9 @@ textarea.form-control {
 .btn:hover i {
     transform: translateX(3px);
 }
+
+/* Ensure alert icon spacing is a single space */
+.alert i { margin-right: 0.25em; }
 
 /* Enhanced search input */
 #searchMessages {

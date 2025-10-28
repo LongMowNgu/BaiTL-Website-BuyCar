@@ -250,6 +250,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // Social Login Placeholders
   const googleBtn = document.getElementById('googleBtn');
   const xBtn = document.getElementById('xBtn');
+  const facebookBtn = document.getElementById('facebookBtn');
+  const telegramBtn = document.getElementById('telegramBtn');
   
   if (googleBtn) {
     googleBtn.addEventListener('click', () => {
@@ -260,6 +262,18 @@ document.addEventListener('DOMContentLoaded', function() {
   if (xBtn) {
     xBtn.addEventListener('click', () => {
       showAlert('X sign-in coming soon!', 'error');
+    });
+  }
+
+  if (facebookBtn) {
+    facebookBtn.addEventListener('click', () => {
+      showAlert('Facebook sign-in coming soon!', 'error');
+    });
+  }
+
+  if (telegramBtn) {
+    telegramBtn.addEventListener('click', () => {
+      showAlert('Telegram sign-in coming soon!', 'error');
     });
   }
 

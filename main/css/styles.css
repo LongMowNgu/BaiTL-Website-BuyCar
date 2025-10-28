@@ -19,6 +19,10 @@
     box-sizing: border-box;
 }
 
+/* Global inline icon spacing across headings/labels/buttons */
+h1 i, h2 i, h3 i, h4 i, h5 i, h6 i,
+label i, p i, a i, button i { margin-right: 0.25em; }
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
@@ -2001,6 +2005,8 @@ small.card-text {
     transition: all 0.3s ease;
     text-decoration: none;
     display: inline-block;
+    box-shadow: 0 6px 18px rgba(255, 255, 255, 0.25);
+    animation: authGlow 2.4s ease-in-out infinite;
 }
 
 .btn-auth-solid:hover,
@@ -2093,6 +2099,11 @@ small.card-text {
 .pill-btn-right:hover {
     transform: scale(1.02);
     z-index: 2;
+}
+
+@keyframes authGlow {
+    0%, 100% { box-shadow: 0 6px 18px rgba(255,255,255,0.25); }
+    50% { box-shadow: 0 10px 30px rgba(255,255,255,0.45); }
 }
 
 /* ===================================
